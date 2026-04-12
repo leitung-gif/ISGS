@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Gold outer ring -->
+  <circle cx="60" cy="60" r="56" stroke="#c9a84c" stroke-width="1.8" fill="none"/>
+  <!-- Dark inner ring -->
+  <circle cx="60" cy="60" r="52" stroke="#2c3654" stroke-width="1" fill="none"/>
+  <!-- Guilloche pattern ring (decorative hatching) -->
+  <circle cx="60" cy="60" r="48" stroke="#8890a8" stroke-width="0.4" fill="none" stroke-dasharray="2 1.5"/>
+  <circle cx="60" cy="60" r="45" stroke="#8890a8" stroke-width="0.3" fill="none" stroke-dasharray="1.5 2"/>
+  <circle cx="60" cy="60" r="42" stroke="#8890a8" stroke-width="0.4" fill="none" stroke-dasharray="2 1.5"/>
+  <!-- Inner fill circle -->
+  <circle cx="60" cy="60" r="40" fill="#f5f3f0"/>
+  <!-- Radial guide lines (subtle guilloche effect) -->
+  <g stroke="#c5c0b8" stroke-width="0.2" opacity="0.5">
+    <line x1="60" y1="20" x2="60" y2="100"/>
+    <line x1="20" y1="60" x2="100" y2="60"/>
+    <line x1="31.7" y1="31.7" x2="88.3" y2="88.3"/>
+    <line x1="88.3" y1="31.7" x2="31.7" y2="88.3"/>
+    <line x1="45.9" y1="21.1" x2="74.1" y2="98.9"/>
+    <line x1="74.1" y1="21.1" x2="45.9" y2="98.9"/>
+    <line x1="21.1" y1="45.9" x2="98.9" y2="74.1"/>
+    <line x1="21.1" y1="74.1" x2="98.9" y2="45.9"/>
+  </g>
+  <!-- Concentric guilloche circles -->
+  <circle cx="60" cy="60" r="36" stroke="#d0cbc3" stroke-width="0.3" fill="none"/>
+  <circle cx="60" cy="60" r="32" stroke="#d0cbc3" stroke-width="0.3" fill="none"/>
+  <circle cx="60" cy="60" r="28" stroke="#d0cbc3" stroke-width="0.2" fill="none"/>
+  <!-- ISG Letters -->
+  <text x="38" y="72" font-family="'Playfair Display', 'Georgia', serif" font-weight="700" font-size="30" fill="#1a2340" letter-spacing="-1">I</text>
+  <text x="44" y="76" font-family="'Playfair Display', 'Georgia', serif" font-weight="700" font-size="38" fill="#1a2340" letter-spacing="-1">S</text>
+  <text x="67" y="72" font-family="'Playfair Display', 'Georgia', serif" font-weight="700" font-size="30" fill="#1a2340" letter-spacing="-1">G</text>
+  <!-- Swiss cross at top -->
+  <g transform="translate(60, 12)">
+    <rect x="-3" y="-1.5" width="6" height="3" rx="0.5" fill="#1a2340"/>
+    <rect x="-1.5" y="-3" width="3" height="6" rx="0.5" fill="#1a2340"/>
+  </g>
+  <!-- Edelweiss flower at bottom -->
+  <g transform="translate(60, 104)" stroke="#c9a84c" stroke-width="0.6" fill="none">
+    <ellipse cx="0" cy="-4" rx="2" ry="5" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-4" rx="2" ry="5" transform="rotate(60)"/>
+    <ellipse cx="0" cy="-4" rx="2" ry="5" transform="rotate(120)"/>
+    <ellipse cx="0" cy="-4" rx="2" ry="5" transform="rotate(180)"/>
+    <ellipse cx="0" cy="-4" rx="2" ry="5" transform="rotate(240)"/>
+    <ellipse cx="0" cy="-4" rx="2" ry="5" transform="rotate(300)"/>
+    <circle cx="0" cy="0" r="1.5" fill="#c9a84c"/>
+  </g>
+</svg>

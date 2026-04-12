@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Kontakt — Immo Schweiz Gruppe | Kostenlose Erstberatung</title>
+  <meta name="description" content="Kontaktieren Sie die Immo Schweiz Gruppe für eine kostenlose, unverbindliche Erstberatung. Per Telefon, E-Mail oder über unser Kontaktformular.">
+  <meta name="theme-color" content="#1a3a5c">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+  <div style="display:none"><svg xmlns="http://www.w3.org/2000/svg">
+    <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.81.36 1.6.7 2.34a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.74.34 1.53.57 2.34.7A2 2 0 0122 16.92z"/></symbol>
+    <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></symbol>
+    <symbol id="icon-location" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  </svg></div>
+
+  <nav class="nav" id="mainNav"><div class="container"><div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img class="nav-logo-mark" src="assets/images/isg-sigil.svg" alt="ISG Sigil" width="42" height="42"><div class="nav-logo-text"><span>IMMO SCHWEIZ</span><span>Gruppe GmbH</span></div></a>
+    <div class="nav-links" id="navLinks"><a href="leistungen.html">Leistungen</a><a href="ueber-uns.html">Über uns</a><a href="preise.html">Preise</a><a href="kontakt.html" class="active">Kontakt</a></div>
+    <a href="kontakt.html" class="btn btn-primary btn-arrow nav-cta">Beratung anfragen</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menü"><span></span><span></span><span></span></button>
+  </div></div></nav>
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Startseite</a><span class="sep">/</span><span>Kontakt</span></div>
+      <h1 data-reveal>Wir freuen uns auf Ihre <em>Anfrage.</em></h1>
+      <p data-reveal>Vereinbaren Sie eine kostenlose, unverbindliche Erstberatung — persönlich, telefonisch oder per Videokonferenz.</p>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <div class="contact-grid" data-reveal>
+        <div>
+          <h2 style="margin-bottom: var(--space-2);">Schreiben Sie uns</h2>
+          <p style="color: var(--text-muted); margin-bottom: var(--space-8); font-weight: 300;">Füllen Sie das Formular aus — wir melden uns innerhalb von 24 Stunden bei Ihnen.</p>
+
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="vorname">Vorname *</label>
+                <input type="text" id="vorname" name="vorname" required placeholder="Max">
+              </div>
+              <div class="form-group">
+                <label for="nachname">Nachname *</label>
+                <input type="text" id="nachname" name="nachname" required placeholder="Muster">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">E-Mail *</label>
+                <input type="email" id="email" name="email" required placeholder="max@beispiel.ch">
+              </div>
+              <div class="form-group">
+                <label for="telefon">Telefon</label>
+                <input type="tel" id="telefon" name="telefon" placeholder="+41 44 000 00 00">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="anliegen">Anliegen</label>
+              <select id="anliegen" name="anliegen">
+                <option value="">Bitte wählen</option>
+                <option value="verwaltung">Verwaltung anfragen</option>
+                <option value="vermarktung">Vermarktung / Verkauf</option>
+                <option value="vermietung">Vermietung</option>
+                <option value="bewertung">Immobilienbewertung</option>
+                <option value="baumanagement">Baumanagement</option>
+                <option value="allgemein">Allgemeine Anfrage</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="nachricht">Ihre Nachricht *</label>
+              <textarea id="nachricht" name="nachricht" required placeholder="Beschreiben Sie Ihr Anliegen — wir beraten Sie gerne persönlich."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-arrow" style="width: 100%; justify-content: center;">Nachricht senden</button>
+          </form>
+        </div>
+
+        <div>
+          <div class="contact-info-card">
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><svg><use href="#icon-phone"/></svg></div>
+              <div>
+                <h4>Telefon</h4>
+                <a href="tel:+41440000000">+41 44 000 00 00</a>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><svg><use href="#icon-mail"/></svg></div>
+              <div>
+                <h4>E-Mail</h4>
+                <a href="mailto:info@immoschweizgruppe.ch">info@immoschweizgruppe.ch</a>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><svg><use href="#icon-location"/></svg></div>
+              <div>
+                <h4>Hauptsitz Zürich</h4>
+                <p>Bahnhofstrasse 42<br>8001 Zürich, Schweiz</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><svg><use href="#icon-location"/></svg></div>
+              <div>
+                <h4>Niederlassung Bern</h4>
+                <p>Bundesgasse 18<br>3011 Bern, Schweiz</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><svg><use href="#icon-location"/></svg></div>
+              <div>
+                <h4>Niederlassung Basel</h4>
+                <p>Aeschenvorstadt 71<br>4051 Basel, Schweiz</p>
+              </div>
+            </div>
+            <div class="contact-info-item">
+              <div class="contact-info-icon"><svg><use href="#icon-clock"/></svg></div>
+              <div>
+                <h4>Öffnungszeiten</h4>
+                <p>Mo – Fr: 08:00 – 18:00<br>Sa & So: Geschlossen</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer"><div class="container">
+    <div class="footer-top" data-reveal>
+      <div class="footer-brand"><div class="nav-logo-text"><span>IMMO SCHWEIZ</span><span>Gruppe GmbH</span></div><p class="footer-tagline">Ihre <em>Immobilien,</em> bestens verwaltet.</p></div>
+      <div class="footer-links"><a href="index.html">Startseite</a><a href="leistungen.html">Leistungen</a><a href="ueber-uns.html">Über uns</a><a href="preise.html">Preise</a><a href="kontakt.html">Kontakt</a></div>
+      <div class="footer-links"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-bottom-left"><a href="mailto:info@immoschweizgruppe.ch">info@immoschweizgruppe.ch</a></div><div class="footer-bottom-right">©2026 Immo Schweiz Gruppe GmbH</div></div>
+  </div></footer>
+
+  <div class="mobile-cta"><div class="mobile-cta-inner"><a href="tel:+41440000000" class="cta-call">Anrufen</a><a href="kontakt.html" class="cta-contact">Beratung anfragen</a></div></div>
+  <script src="main.js"></script>
+</body>
+</html>
