@@ -11,8 +11,8 @@
   const loader = document.getElementById('siteLoader');
   if (loader) {
     window.addEventListener('load', () => {
-      setTimeout(() => loader.classList.add('loaded'), 400);
-      setTimeout(() => loader.remove(), 1200);
+      setTimeout(() => loader.classList.add('loaded'), 1400);
+      setTimeout(() => loader.remove(), 2200);
     });
   }
 
@@ -149,7 +149,6 @@
 
   const beliefsSection = canvas.closest('.beliefs-section');
   let W, H, t = 0;
-  let mouseX = 0.5, mouseY = 0.5, tMX = 0.5, tMY = 0.5;
   let isVisible = false;
 
   function resize() {
@@ -158,18 +157,6 @@
     gl.viewport(0, 0, W, H);
   }
   window.addEventListener('resize', resize);
-
-  // Track mouse relative to beliefs section for focused interaction
-  if (beliefsSection) {
-    beliefsSection.addEventListener('mousemove', e => {
-      const rect = beliefsSection.getBoundingClientRect();
-      tMX = (e.clientX - rect.left) / rect.width;
-      tMY = 1.0 - (e.clientY - rect.top) / rect.height;
-    });
-    beliefsSection.addEventListener('mouseleave', () => {
-      tMX = 0.5; tMY = 0.5;
-    });
-  }
 
   // Visibility observer — only render when in view
   const visObs = new IntersectionObserver(entries => {
@@ -235,27 +222,19 @@
 
   vec3 modeDrift(vec2 uv, float t, vec2 mouse) {
     vec2 p = uv - 0.5;
-    p += (mouse - 0.5) * 0.4;
+    p += (mouse - 0.5) * 0.25;
 
     vec2 q = vec2(
-      fbm(uv * 2.6 + vec2(t * 0.08, t * 0.10), 6),
-      fbm(uv * 2.6 + vec2(2.3, 7.1) + vec2(t * 0.09, -t * 0.07), 6)
+      fbm(uv * 2.2 + vec2(t * 0.04, t * 0.05), 5),
+      fbm(uv * 2.2 + vec2(2.3, 7.1) + vec2(t * 0.045, -t * 0.035), 5)
     );
     vec2 r = vec2(
-      fbm(uv * 2.0 + 3.5 * q + vec2(2.1, 8.7) + t * 0.05, 6),
-      fbm(uv * 2.0 + 3.5 * q + vec2(7.4, 3.1) + t * 0.06, 6)
+      fbm(uv * 1.8 + 3.0 * q + vec2(2.1, 8.7) + t * 0.025, 5),
+      fbm(uv * 1.8 + 3.0 * q + vec2(7.4, 3.1) + t * 0.03, 5)
     );
 
-    float f = fbm(uv * 2.0 + 3.5 * r, 6);
+    float f = fbm(uv * 1.8 + 3.0 * r, 5);
     f = smoothstep(0.05, 0.95, f);
-
-    // Much stronger mouse influence
-    float mi = 1.0 - smoothstep(0.0, 0.55, length(uv - mouse));
-    f = mix(f, f * 1.6, mi * 0.55);
-
-    // Ripple effect near cursor
-    float ripple = sin(length(uv - mouse) * 20.0 - t * 3.0) * 0.03;
-    f += ripple * mi;
 
     return alpineLake(clamp(f, 0.0, 1.0));
   }
@@ -308,15 +287,16 @@
 
   function frame(ts) {
     requestAnimationFrame(frame);
-    if (!isVisible) return; // Skip rendering when offscreen
+    if (!isVisible) return;
     
     t = ts * 0.001;
-    mouseX += (tMX - mouseX) * 0.06;
-    mouseY += (tMY - mouseY) * 0.06;
+    // Auto-drifting mouse position (no interaction needed)
+    const autoX = 0.5 + Math.sin(t * 0.3) * 0.25;
+    const autoY = 0.5 + Math.cos(t * 0.2) * 0.25;
 
     gl.uniform1f(uTime, t);
     gl.uniform2f(uRes, W, H);
-    gl.uniform2f(uMouse, mouseX, mouseY);
+    gl.uniform2f(uMouse, autoX, autoY);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
   }
 

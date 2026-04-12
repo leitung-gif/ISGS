@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
 }
 .loader.loaded {
   opacity: 0;
@@ -20,22 +20,25 @@
   pointer-events: none;
 }
 .loader-edelweiss {
-  width: 64px; height: 64px;
-  animation: loaderSpin 3s linear infinite;
+  width: 80px; height: 80px;
+  animation: loaderSpin 4s linear infinite;
 }
 .loader-petals {
-  animation: loaderPulse 1.5s ease-in-out infinite;
+  animation: loaderPulse 2s ease-in-out infinite;
 }
 .loader-petals-outer {
-  animation: loaderPulse 1.5s ease-in-out 0.3s infinite;
+  animation: loaderPulse 2s ease-in-out 0.4s infinite;
+}
+.loader-hairs {
+  animation: loaderPulse 2s ease-in-out 0.8s infinite;
 }
 @keyframes loaderSpin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 @keyframes loaderPulse {
-  0%, 100% { opacity: 0.4; transform: scale(0.95); }
-  50% { opacity: 1; transform: scale(1.05); }
+  0%, 100% { opacity: 0.3; transform: scale(0.92); }
+  50% { opacity: 1; transform: scale(1.08); }
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap');
@@ -637,20 +640,20 @@ body.has-side-nav { padding-left: 0; }
   position: relative;
 }
 .section-light {
-  background: var(--bg);
+  background-color: var(--bg);
   background-image: url('assets/images/edelweiss-fabric.avif');
-  background-size: cover;
+  background-size: 600px;
   background-position: center;
-  background-blend-mode: soft-light;
-  background-repeat: no-repeat;
+  background-blend-mode: multiply;
+  background-repeat: repeat;
 }
 .section-warm {
-  background: var(--bg-warm);
+  background-color: var(--bg-warm);
   background-image: url('assets/images/edelweiss-fabric.avif');
-  background-size: cover;
+  background-size: 600px;
   background-position: center;
-  background-blend-mode: soft-light;
-  background-repeat: no-repeat;
+  background-blend-mode: multiply;
+  background-repeat: repeat;
 }
 .section-dark { background: var(--bg-dark); color: white; }
 .section-dark h2, .section-dark h3 { color: white; }
@@ -820,69 +823,76 @@ body.has-side-nav { padding-left: 0; }
 .section-dark .stat-label { color: var(--text-light-muted); }
 
 /* ═══════════════════════════════════════════
-   SERVICE CARDS
+   SERVICES — EDITORIAL ROWS
    ═══════════════════════════════════════════ */
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
+.services-editorial {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.service-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-10);
-  transition: all var(--duration) var(--ease);
-  text-align: center;
-}
-.service-card:hover {
-  border-color: var(--border-hover);
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-}
-
-.section-dark .service-card {
-  background: var(--bg-dark-card);
-  border-color: rgba(255,255,255,0.08);
-}
-.section-dark .service-card:hover {
-  border-color: rgba(255,255,255,0.15);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-}
-
-.service-card .icon-box {
-  width: 48px; height: 48px;
+.service-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-md);
-  background: var(--blue-50);
-  margin: 0 auto var(--space-6);
+  gap: var(--space-8);
+  padding: var(--space-8) 0;
+  border-bottom: 1px solid var(--border);
+  transition: all var(--duration) var(--ease);
 }
-.section-dark .service-card .icon-box {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.08);
+.service-row:first-child {
+  border-top: 1px solid var(--border);
+}
+.service-row:hover {
+  padding-left: var(--space-4);
 }
 
-.service-card .icon-box svg {
-  width: 24px; height: 24px; color: var(--blue-600); stroke-width: 1.5;
+.service-num {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 300;
+  color: var(--blue-300);
+  min-width: 52px;
+  line-height: 1;
+  letter-spacing: -0.02em;
 }
-.service-card h3 { font-size: var(--text-xl); font-weight: 500; margin-bottom: var(--space-4); }
-.service-card p { font-size: var(--text-sm); color: var(--text-muted); line-height: 1.7; font-weight: 300; }
-.section-dark .service-card p { color: var(--text-light-muted); }
 
-.card-link {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  margin-top: var(--space-6);
-  font-size: var(--text-sm);
+.service-info {
+  flex: 1;
+}
+.service-info h3 {
+  font-size: var(--text-xl);
   font-weight: 500;
-  color: var(--blue-600);
-  transition: gap var(--duration-fast) var(--ease);
+  color: var(--text-heading);
+  margin-bottom: var(--space-2);
 }
-.service-card:hover .card-link { gap: var(--space-4); }
+.service-info p {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.service-arrow {
+  font-size: var(--text-2xl);
+  color: var(--blue-400);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all var(--duration-fast) var(--ease);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.service-row:hover .service-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Dark variant */
+.section-dark .service-row {
+  border-color: rgba(255,255,255,0.08);
+}
+.section-dark .service-num { color: var(--blue-400); }
+.section-dark .service-info h3 { color: white; }
+.section-dark .service-info p { color: var(--text-light-muted); }
+.section-dark .service-arrow { color: var(--blue-300); }
 
 /* ═══════════════════════════════════════════
    SPLIT LAYOUT
@@ -1276,7 +1286,7 @@ body.has-side-nav { padding-left: 0; }
 /* ═══════════════════════════════════════════
    MATTERHORN TRAIL PROCESS
    ═══════════════════════════════════════════ */
-.matterhorn-section { overflow: hidden; padding-bottom: var(--space-4); }
+.matterhorn-section { overflow: hidden; padding-bottom: 0; }
 .matterhorn-trail {
   position: relative;
   min-height: 600px;
@@ -1446,4 +1456,83 @@ body.has-side-nav { padding-left: 0; }
     margin-bottom: var(--space-6);
   }
   .trail-card { max-width: 100%; }
+}
+
+/* ═══════════════════════════════════════════
+   WHATSAPP FAB
+   ═══════════════════════════════════════════ */
+.whatsapp-fab {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25d366;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+  transition: all var(--duration-fast) var(--ease);
+}
+.whatsapp-fab:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(37, 211, 102, 0.5);
+}
+.whatsapp-fab svg {
+  width: 28px;
+  height: 28px;
+}
+@media (max-width: 768px) {
+  .whatsapp-fab {
+    bottom: 80px;
+    right: 16px;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   NAV PHONE ICON
+   ═══════════════════════════════════════════ */
+.nav-phone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  transition: all var(--duration-fast) var(--ease);
+  margin-right: var(--space-2);
+}
+.nav-phone:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.4);
+  transform: scale(1.08);
+}
+.nav-phone svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+.nav--hero-mode.scrolled .nav-phone,
+.nav:not(.nav--hero-mode) .nav-phone {
+  color: var(--blue-800);
+  border-color: var(--border);
+}
+.nav--hero-mode.scrolled .nav-phone:hover,
+.nav:not(.nav--hero-mode) .nav-phone:hover {
+  background: var(--blue-50);
+  border-color: var(--blue-200);
+}
+
+/* ═══════════════════════════════════════════
+   WHITE STRIPE FIX — eliminate gaps between sections
+   ═══════════════════════════════════════════ */
+.section + .section {
+  margin-top: -1px;
 }
