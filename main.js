@@ -16,19 +16,6 @@
     });
   }
 
-  // ─── EDELWEISS BACKGROUND FLOWERS ───
-  document.querySelectorAll('.section-light, .section-warm').forEach(section => {
-    const bg = document.createElement('div');
-    bg.className = 'edelweiss-bg';
-    bg.setAttribute('aria-hidden', 'true');
-    for (let i = 0; i < 10; i++) {
-      const ew = document.createElement('div');
-      ew.className = 'ew';
-      bg.appendChild(ew);
-    }
-    section.prepend(bg);
-  });
-
   // ─── SCROLL REVEAL ───
   const revealObs = new IntersectionObserver((entries) => {
     entries.forEach(e => {

@@ -1,45 +1,61 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
-  <!-- Edelweiss — Traditional Swiss Alpine Flower -->
-  <!-- Outer petals layer -->
-  <g opacity="0.9">
-    <ellipse cx="100" cy="52" rx="12" ry="38" fill="#e8e2d8" stroke="#c9c1b4" stroke-width="0.8" transform="rotate(0 100 100)"/>
-    <ellipse cx="100" cy="52" rx="12" ry="38" fill="#e8e2d8" stroke="#c9c1b4" stroke-width="0.8" transform="rotate(51.4 100 100)"/>
-    <ellipse cx="100" cy="52" rx="12" ry="38" fill="#e8e2d8" stroke="#c9c1b4" stroke-width="0.8" transform="rotate(102.8 100 100)"/>
-    <ellipse cx="100" cy="52" rx="12" ry="38" fill="#e8e2d8" stroke="#c9c1b4" stroke-width="0.8" transform="rotate(154.3 100 100)"/>
-    <ellipse cx="100" cy="52" rx="12" ry="38" fill="#e8e2d8" stroke="#c9c1b4" stroke-width="0.8" transform="rotate(205.7 100 100)"/>
-    <ellipse cx="100" cy="52" rx="12" ry="38" fill="#e8e2d8" stroke="#c9c1b4" stroke-width="0.8" transform="rotate(257.1 100 100)"/>
-    <ellipse cx="100" cy="52" rx="12" ry="38" fill="#e8e2d8" stroke="#c9c1b4" stroke-width="0.8" transform="rotate(308.6 100 100)"/>
+  <defs>
+    <radialGradient id="petalG" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#f5f0e8"/>
+      <stop offset="60%" stop-color="#ede6da"/>
+      <stop offset="100%" stop-color="#ddd5c6"/>
+    </radialGradient>
+    <radialGradient id="petalG2" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#f0ebe2"/>
+      <stop offset="100%" stop-color="#d8d0c0"/>
+    </radialGradient>
+    <radialGradient id="centerG" cx="45%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#e5cc80"/>
+      <stop offset="50%" stop-color="#d4b55a"/>
+      <stop offset="100%" stop-color="#b89838"/>
+    </radialGradient>
+  </defs>
+  <!-- Outer petals — 7 large, slightly fuzzy -->
+  <g opacity="0.92">
+    <ellipse cx="100" cy="50" rx="14" ry="40" fill="url(#petalG)" stroke="#c9bfad" stroke-width="0.6" transform="rotate(0 100 100)"/>
+    <ellipse cx="100" cy="50" rx="14" ry="40" fill="url(#petalG)" stroke="#c9bfad" stroke-width="0.6" transform="rotate(51.4 100 100)"/>
+    <ellipse cx="100" cy="50" rx="14" ry="40" fill="url(#petalG)" stroke="#c9bfad" stroke-width="0.6" transform="rotate(102.8 100 100)"/>
+    <ellipse cx="100" cy="50" rx="14" ry="40" fill="url(#petalG)" stroke="#c9bfad" stroke-width="0.6" transform="rotate(154.3 100 100)"/>
+    <ellipse cx="100" cy="50" rx="14" ry="40" fill="url(#petalG)" stroke="#c9bfad" stroke-width="0.6" transform="rotate(205.7 100 100)"/>
+    <ellipse cx="100" cy="50" rx="14" ry="40" fill="url(#petalG)" stroke="#c9bfad" stroke-width="0.6" transform="rotate(257.1 100 100)"/>
+    <ellipse cx="100" cy="50" rx="14" ry="40" fill="url(#petalG)" stroke="#c9bfad" stroke-width="0.6" transform="rotate(308.6 100 100)"/>
   </g>
-  <!-- Inner petals layer -->
-  <g opacity="0.85">
-    <ellipse cx="100" cy="62" rx="9" ry="28" fill="#ece7df" stroke="#d4cec4" stroke-width="0.6" transform="rotate(25.7 100 100)"/>
-    <ellipse cx="100" cy="62" rx="9" ry="28" fill="#ece7df" stroke="#d4cec4" stroke-width="0.6" transform="rotate(77.1 100 100)"/>
-    <ellipse cx="100" cy="62" rx="9" ry="28" fill="#ece7df" stroke="#d4cec4" stroke-width="0.6" transform="rotate(128.6 100 100)"/>
-    <ellipse cx="100" cy="62" rx="9" ry="28" fill="#ece7df" stroke="#d4cec4" stroke-width="0.6" transform="rotate(180 100 100)"/>
-    <ellipse cx="100" cy="62" rx="9" ry="28" fill="#ece7df" stroke="#d4cec4" stroke-width="0.6" transform="rotate(231.4 100 100)"/>
-    <ellipse cx="100" cy="62" rx="9" ry="28" fill="#ece7df" stroke="#d4cec4" stroke-width="0.6" transform="rotate(282.8 100 100)"/>
-    <ellipse cx="100" cy="62" rx="9" ry="28" fill="#ece7df" stroke="#d4cec4" stroke-width="0.6" transform="rotate(334.3 100 100)"/>
+  <!-- Inner petals — 7 smaller, offset rotation -->
+  <g opacity="0.88">
+    <ellipse cx="100" cy="60" rx="10" ry="30" fill="url(#petalG2)" stroke="#d4cabb" stroke-width="0.4" transform="rotate(25.7 100 100)"/>
+    <ellipse cx="100" cy="60" rx="10" ry="30" fill="url(#petalG2)" stroke="#d4cabb" stroke-width="0.4" transform="rotate(77.1 100 100)"/>
+    <ellipse cx="100" cy="60" rx="10" ry="30" fill="url(#petalG2)" stroke="#d4cabb" stroke-width="0.4" transform="rotate(128.6 100 100)"/>
+    <ellipse cx="100" cy="60" rx="10" ry="30" fill="url(#petalG2)" stroke="#d4cabb" stroke-width="0.4" transform="rotate(180 100 100)"/>
+    <ellipse cx="100" cy="60" rx="10" ry="30" fill="url(#petalG2)" stroke="#d4cabb" stroke-width="0.4" transform="rotate(231.4 100 100)"/>
+    <ellipse cx="100" cy="60" rx="10" ry="30" fill="url(#petalG2)" stroke="#d4cabb" stroke-width="0.4" transform="rotate(282.8 100 100)"/>
+    <ellipse cx="100" cy="60" rx="10" ry="30" fill="url(#petalG2)" stroke="#d4cabb" stroke-width="0.4" transform="rotate(334.3 100 100)"/>
   </g>
-  <!-- Fuzzy texture lines on petals -->
-  <g opacity="0.3" stroke="#b8b0a2" stroke-width="0.4" fill="none">
-    <ellipse cx="100" cy="56" rx="6" ry="22" transform="rotate(12 100 100)"/>
-    <ellipse cx="100" cy="56" rx="6" ry="22" transform="rotate(63 100 100)"/>
-    <ellipse cx="100" cy="56" rx="6" ry="22" transform="rotate(115 100 100)"/>
-    <ellipse cx="100" cy="56" rx="6" ry="22" transform="rotate(167 100 100)"/>
-    <ellipse cx="100" cy="56" rx="6" ry="22" transform="rotate(218 100 100)"/>
-    <ellipse cx="100" cy="56" rx="6" ry="22" transform="rotate(270 100 100)"/>
-    <ellipse cx="100" cy="56" rx="6" ry="22" transform="rotate(321 100 100)"/>
+  <!-- Petal vein lines — subtle texture -->
+  <g opacity="0.15" stroke="#a89880" stroke-width="0.3" fill="none">
+    <line x1="100" y1="100" x2="100" y2="60" transform="rotate(0 100 100)"/>
+    <line x1="100" y1="100" x2="100" y2="60" transform="rotate(51.4 100 100)"/>
+    <line x1="100" y1="100" x2="100" y2="60" transform="rotate(102.8 100 100)"/>
+    <line x1="100" y1="100" x2="100" y2="60" transform="rotate(154.3 100 100)"/>
+    <line x1="100" y1="100" x2="100" y2="60" transform="rotate(205.7 100 100)"/>
+    <line x1="100" y1="100" x2="100" y2="60" transform="rotate(257.1 100 100)"/>
+    <line x1="100" y1="100" x2="100" y2="60" transform="rotate(308.6 100 100)"/>
   </g>
-  <!-- Center — golden yellow dots (traditional edelweiss) -->
-  <circle cx="100" cy="100" r="14" fill="#c4a24a" opacity="0.9"/>
-  <circle cx="100" cy="100" r="10" fill="#d4b55a"/>
-  <circle cx="100" cy="93" r="2.5" fill="#dbbf6c" opacity="0.9"/>
-  <circle cx="106" cy="95" r="2.2" fill="#dbbf6c" opacity="0.85"/>
-  <circle cx="108" cy="101" r="2.3" fill="#dbbf6c" opacity="0.8"/>
-  <circle cx="105" cy="107" r="2.4" fill="#dbbf6c" opacity="0.85"/>
-  <circle cx="98" cy="108" r="2.2" fill="#dbbf6c" opacity="0.9"/>
-  <circle cx="93" cy="104" r="2.3" fill="#dbbf6c" opacity="0.85"/>
-  <circle cx="92" cy="97" r="2.4" fill="#dbbf6c" opacity="0.8"/>
-  <circle cx="96" cy="93" r="2.1" fill="#dbbf6c" opacity="0.9"/>
-  <circle cx="100" cy="100" r="3" fill="#e5cc80" opacity="0.7"/>
+  <!-- Center — golden with detailed dots -->
+  <circle cx="100" cy="100" r="16" fill="url(#centerG)"/>
+  <circle cx="100" cy="100" r="12" fill="#d4b55a" opacity="0.6"/>
+  <!-- Center dots -->
+  <circle cx="100" cy="92" r="2.5" fill="#e8d08a" opacity="0.8"/>
+  <circle cx="107" cy="95" r="2.2" fill="#e8d08a" opacity="0.7"/>
+  <circle cx="109" cy="102" r="2.3" fill="#e8d08a" opacity="0.75"/>
+  <circle cx="105" cy="108" r="2.4" fill="#e8d08a" opacity="0.7"/>
+  <circle cx="97" cy="109" r="2.2" fill="#e8d08a" opacity="0.8"/>
+  <circle cx="92" cy="104" r="2.3" fill="#e8d08a" opacity="0.75"/>
+  <circle cx="91" cy="97" r="2.4" fill="#e8d08a" opacity="0.7"/>
+  <circle cx="95" cy="92" r="2.1" fill="#e8d08a" opacity="0.8"/>
+  <circle cx="100" cy="100" r="3" fill="#f0dfa0" opacity="0.5"/>
 </svg>
