@@ -655,17 +655,17 @@ body.has-side-nav { padding-left: 0; }
 .section-light {
   background-color: var(--bg);
   background-image: url('assets/images/edelweiss-fabric.avif');
-  background-size: 800px;
+  background-size: 1200px;
   background-position: center;
-  background-blend-mode: overlay;
+  background-blend-mode: soft-light;
   background-repeat: repeat;
 }
 .section-warm {
   background-color: var(--bg-warm);
   background-image: url('assets/images/edelweiss-fabric.avif');
-  background-size: 800px;
+  background-size: 1200px;
   background-position: center;
-  background-blend-mode: overlay;
+  background-blend-mode: soft-light;
   background-repeat: repeat;
 }
 .section-dark { background: var(--bg-dark); color: white; }
