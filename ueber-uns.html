@@ -13,37 +13,11 @@
 <body>
   <!-- LOADING SCREEN -->
   <div class="loader" id="siteLoader">
-    <svg class="loader-edelweiss" viewBox="0 0 120 120" width="80" height="80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="60" cy="60" r="5" fill="#c9a84c" opacity="0.7"/>
-      <circle cx="60" cy="60" r="8" stroke="#c9a84c" stroke-width="0.5" fill="none" opacity="0.4"/>
-      <g class="loader-petals" fill="none">
-        <ellipse cx="60" cy="40" rx="4.5" ry="16" stroke="#8faec8" stroke-width="1" transform="rotate(0 60 60)"/>
-        <ellipse cx="60" cy="40" rx="4.5" ry="16" stroke="#8faec8" stroke-width="1" transform="rotate(60 60 60)"/>
-        <ellipse cx="60" cy="40" rx="4.5" ry="16" stroke="#8faec8" stroke-width="1" transform="rotate(120 60 60)"/>
-        <ellipse cx="60" cy="40" rx="4.5" ry="16" stroke="#8faec8" stroke-width="1" transform="rotate(180 60 60)"/>
-        <ellipse cx="60" cy="40" rx="4.5" ry="16" stroke="#8faec8" stroke-width="1" transform="rotate(240 60 60)"/>
-        <ellipse cx="60" cy="40" rx="4.5" ry="16" stroke="#8faec8" stroke-width="1" transform="rotate(300 60 60)"/>
-      </g>
-      <g class="loader-petals-outer" fill="none">
-        <ellipse cx="60" cy="34" rx="3" ry="12" stroke="#a5c4d8" stroke-width="0.7" transform="rotate(30 60 60)"/>
-        <ellipse cx="60" cy="34" rx="3" ry="12" stroke="#a5c4d8" stroke-width="0.7" transform="rotate(90 60 60)"/>
-        <ellipse cx="60" cy="34" rx="3" ry="12" stroke="#a5c4d8" stroke-width="0.7" transform="rotate(150 60 60)"/>
-        <ellipse cx="60" cy="34" rx="3" ry="12" stroke="#a5c4d8" stroke-width="0.7" transform="rotate(210 60 60)"/>
-        <ellipse cx="60" cy="34" rx="3" ry="12" stroke="#a5c4d8" stroke-width="0.7" transform="rotate(270 60 60)"/>
-        <ellipse cx="60" cy="34" rx="3" ry="12" stroke="#a5c4d8" stroke-width="0.7" transform="rotate(330 60 60)"/>
-      </g>
-      <g class="loader-hairs" stroke="#c0d4e2" stroke-width="0.3" fill="none" opacity="0.5">
-        <ellipse cx="60" cy="36" rx="2" ry="8" transform="rotate(15 60 60)"/>
-        <ellipse cx="60" cy="36" rx="2" ry="8" transform="rotate(75 60 60)"/>
-        <ellipse cx="60" cy="36" rx="2" ry="8" transform="rotate(135 60 60)"/>
-        <ellipse cx="60" cy="36" rx="2" ry="8" transform="rotate(195 60 60)"/>
-        <ellipse cx="60" cy="36" rx="2" ry="8" transform="rotate(255 60 60)"/>
-        <ellipse cx="60" cy="36" rx="2" ry="8" transform="rotate(315 60 60)"/>
-      </g>
-    </svg>
+    <img class="loader-edelweiss" src="assets/images/edelweiss-flower.svg" alt="" width="80" height="80">
+    <span class="loader-label">Immo Schweiz Gruppe</span>
   </div>
 
-  <div style="display:none"><svg xmlns="http://www.w3.org/2000/svg">
+<div style="display:none"><svg xmlns="http://www.w3.org/2000/svg">
     <symbol id="icon-check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"/></symbol>
   </svg></div>
 
@@ -129,19 +103,19 @@
       </div>
       <div class="services-scroll" data-reveal-stagger>
         <div class="service-card-h" style="background: var(--bg-card); border-color: var(--border);">
-          <div style="width:56px;height:56px;border-radius:50%;background:var(--blue-800);color:white;display:flex;align-items:center;justify-content:center;font-size:var(--text-lg);font-weight:500;margin-bottom:var(--space-6);">TM</div>
+          <img src="assets/images/team-thomas.jpg" alt="Thomas Müller" style="width:72px;height:72px;border-radius:50%;object-fit:cover;margin-bottom:var(--space-6);border:2px solid var(--gold-muted);">
           <h3 style="color: var(--text-primary);">Thomas Müller</h3>
           <span style="font-size:var(--text-xs);color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;display:block;margin-bottom:var(--space-4);">Gründer & Geschäftsführer</span>
           <p style="color:var(--text-muted);">Über 20 Jahre im Schweizer Immobilienmarkt. Ehemaliger Portfoliomanager. SVIT-zertifiziert.</p>
         </div>
         <div class="service-card-h" style="background: var(--bg-card); border-color: var(--border);">
-          <div style="width:56px;height:56px;border-radius:50%;background:var(--blue-800);color:white;display:flex;align-items:center;justify-content:center;font-size:var(--text-lg);font-weight:500;margin-bottom:var(--space-6);">SF</div>
+          <img src="assets/images/team-sarah.jpg" alt="Sarah Fischer" style="width:72px;height:72px;border-radius:50%;object-fit:cover;margin-bottom:var(--space-6);border:2px solid var(--gold-muted);">
           <h3 style="color: var(--text-primary);">Sarah Fischer</h3>
           <span style="font-size:var(--text-xs);color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;display:block;margin-bottom:var(--space-4);">Leiterin Vermarktung</span>
           <p style="color:var(--text-muted);">Spezialistin für Premium-Vermarktung mit über 200 Transaktionen. Zertifizierte Maklerin.</p>
         </div>
         <div class="service-card-h" style="background: var(--bg-card); border-color: var(--border);">
-          <div style="width:56px;height:56px;border-radius:50%;background:var(--blue-800);color:white;display:flex;align-items:center;justify-content:center;font-size:var(--text-lg);font-weight:500;margin-bottom:var(--space-6);">LW</div>
+          <img src="assets/images/team-lukas.jpg" alt="Lukas Weber" style="width:72px;height:72px;border-radius:50%;object-fit:cover;margin-bottom:var(--space-6);border:2px solid var(--gold-muted);">
           <h3 style="color: var(--text-primary);">Lukas Weber</h3>
           <span style="font-size:var(--text-xs);color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;display:block;margin-bottom:var(--space-4);">Leiter Bewirtschaftung</span>
           <p style="color:var(--text-muted);">SVIT-zertifizierter Bewirtschafter. Schwerpunkt institutionelle Portfolios.</p>
@@ -159,8 +133,8 @@
       </div>
       <div style="max-width:480px;margin:0 auto;text-align:center;" data-reveal>
         <svg class="highlight-icon" viewBox="0 0 48 48" fill="none" stroke="var(--gold)" stroke-width="1.2" style="width:48px;height:48px;margin:0 auto var(--space-4);display:block;"><path d="M24 2c7.732 0 14 6.268 14 14 0 10.5-14 28-14 28S10 26.5 10 16C10 8.268 16.268 2 24 2z"/><circle cx="24" cy="16" r="5"/></svg>
-        <h3 style="color:var(--text-primary);margin-bottom:var(--space-2);">Zürich, Schweiz</h3>
-        <p style="color:var(--text-muted);font-size:var(--text-sm);margin-bottom:var(--space-6);">Ihr Partner für professionelle Immobilienvermarktung in der gesamten Deutschschweiz.</p>
+        <h3 style="color:var(--text-primary);margin-bottom:var(--space-2);">Standort Zürich</h3>
+        <p style="color:var(--text-muted);font-size:var(--text-sm);margin-bottom:var(--space-2);">Bahnhofstrasse 42<br>8001 Zürich, Schweiz</p><p style="color:var(--text-muted);font-size:var(--text-sm);margin-bottom:var(--space-6);">Ihr Partner für professionelle Immobilienvermarktung in der Deutschschweiz.</p>
         <p style="color:var(--text-muted);font-size:var(--text-sm);">Mo – Fr: 08:00 – 18:00 &nbsp;·&nbsp; <a href="tel:+41766543216" style="color:var(--gold);">+41 76 654 321 6</a> &nbsp;·&nbsp; <a href="mailto:info@immoschweizgruppe.com" style="color:var(--gold);">info@immoschweizgruppe.com</a></p>
       </div>
     </div>

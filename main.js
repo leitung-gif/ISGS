@@ -1,7 +1,7 @@
 /* ============================================
-   IMMO SCHWEIZ GRUPPE — v5.0 JS
-   WebGL Alpine Lake gradient, scroll reveals,
-   counters, FAQ, nav, floating pill nav
+   IMMO SCHWEIZ GRUPPE — v8.5 JS
+   Edelweiss background, scroll reveals,
+   counters, nav, floating pill nav
    ============================================ */
 
 (function() {
@@ -15,6 +15,19 @@
       setTimeout(() => loader.remove(), 2200);
     });
   }
+
+  // ─── EDELWEISS BACKGROUND FLOWERS ───
+  document.querySelectorAll('.section-light, .section-warm').forEach(section => {
+    const bg = document.createElement('div');
+    bg.className = 'edelweiss-bg';
+    bg.setAttribute('aria-hidden', 'true');
+    for (let i = 0; i < 10; i++) {
+      const ew = document.createElement('div');
+      ew.className = 'ew';
+      bg.appendChild(ew);
+    }
+    section.prepend(bg);
+  });
 
   // ─── SCROLL REVEAL ───
   const revealObs = new IntersectionObserver((entries) => {

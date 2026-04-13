@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <!-- Edelweiss — Traditional Swiss Alpine Flower -->
+  <!-- Outer petals layer -->
+  <g opacity="0.9">
+    <ellipse cx="100" cy="52" rx="12" ry="38" fill="#e8e2d8" stroke="#c9c1b4" stroke-width="0.8" transform="rotate(0 100 100)"/>
+    <ellipse cx="100" cy="52" rx="12" ry="38" fill="#e8e2d8" stroke="#c9c1b4" stroke-width="0.8" transform="rotate(51.4 100 100)"/>
+    <ellipse cx="100" cy="52" rx="12" ry="38" fill="#e8e2d8" stroke="#c9c1b4" stroke-width="0.8" transform="rotate(102.8 100 100)"/>
+    <ellipse cx="100" cy="52" rx="12" ry="38" fill="#e8e2d8" stroke="#c9c1b4" stroke-width="0.8" transform="rotate(154.3 100 100)"/>
+    <ellipse cx="100" cy="52" rx="12" ry="38" fill="#e8e2d8" stroke="#c9c1b4" stroke-width="0.8" transform="rotate(205.7 100 100)"/>
+    <ellipse cx="100" cy="52" rx="12" ry="38" fill="#e8e2d8" stroke="#c9c1b4" stroke-width="0.8" transform="rotate(257.1 100 100)"/>
+    <ellipse cx="100" cy="52" rx="12" ry="38" fill="#e8e2d8" stroke="#c9c1b4" stroke-width="0.8" transform="rotate(308.6 100 100)"/>
+  </g>
+  <!-- Inner petals layer -->
+  <g opacity="0.85">
+    <ellipse cx="100" cy="62" rx="9" ry="28" fill="#ece7df" stroke="#d4cec4" stroke-width="0.6" transform="rotate(25.7 100 100)"/>
+    <ellipse cx="100" cy="62" rx="9" ry="28" fill="#ece7df" stroke="#d4cec4" stroke-width="0.6" transform="rotate(77.1 100 100)"/>
+    <ellipse cx="100" cy="62" rx="9" ry="28" fill="#ece7df" stroke="#d4cec4" stroke-width="0.6" transform="rotate(128.6 100 100)"/>
+    <ellipse cx="100" cy="62" rx="9" ry="28" fill="#ece7df" stroke="#d4cec4" stroke-width="0.6" transform="rotate(180 100 100)"/>
+    <ellipse cx="100" cy="62" rx="9" ry="28" fill="#ece7df" stroke="#d4cec4" stroke-width="0.6" transform="rotate(231.4 100 100)"/>
+    <ellipse cx="100" cy="62" rx="9" ry="28" fill="#ece7df" stroke="#d4cec4" stroke-width="0.6" transform="rotate(282.8 100 100)"/>
+    <ellipse cx="100" cy="62" rx="9" ry="28" fill="#ece7df" stroke="#d4cec4" stroke-width="0.6" transform="rotate(334.3 100 100)"/>
+  </g>
+  <!-- Fuzzy texture lines on petals -->
+  <g opacity="0.3" stroke="#b8b0a2" stroke-width="0.4" fill="none">
+    <ellipse cx="100" cy="56" rx="6" ry="22" transform="rotate(12 100 100)"/>
+    <ellipse cx="100" cy="56" rx="6" ry="22" transform="rotate(63 100 100)"/>
+    <ellipse cx="100" cy="56" rx="6" ry="22" transform="rotate(115 100 100)"/>
+    <ellipse cx="100" cy="56" rx="6" ry="22" transform="rotate(167 100 100)"/>
+    <ellipse cx="100" cy="56" rx="6" ry="22" transform="rotate(218 100 100)"/>
+    <ellipse cx="100" cy="56" rx="6" ry="22" transform="rotate(270 100 100)"/>
+    <ellipse cx="100" cy="56" rx="6" ry="22" transform="rotate(321 100 100)"/>
+  </g>
+  <!-- Center — golden yellow dots (traditional edelweiss) -->
+  <circle cx="100" cy="100" r="14" fill="#c4a24a" opacity="0.9"/>
+  <circle cx="100" cy="100" r="10" fill="#d4b55a"/>
+  <circle cx="100" cy="93" r="2.5" fill="#dbbf6c" opacity="0.9"/>
+  <circle cx="106" cy="95" r="2.2" fill="#dbbf6c" opacity="0.85"/>
+  <circle cx="108" cy="101" r="2.3" fill="#dbbf6c" opacity="0.8"/>
+  <circle cx="105" cy="107" r="2.4" fill="#dbbf6c" opacity="0.85"/>
+  <circle cx="98" cy="108" r="2.2" fill="#dbbf6c" opacity="0.9"/>
+  <circle cx="93" cy="104" r="2.3" fill="#dbbf6c" opacity="0.85"/>
+  <circle cx="92" cy="97" r="2.4" fill="#dbbf6c" opacity="0.8"/>
+  <circle cx="96" cy="93" r="2.1" fill="#dbbf6c" opacity="0.9"/>
+  <circle cx="100" cy="100" r="3" fill="#e5cc80" opacity="0.7"/>
+</svg>
