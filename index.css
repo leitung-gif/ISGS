@@ -326,7 +326,7 @@ em, .em {
 
 /* ── Floating Pill Nav (after hero) ── */
 .nav.nav-side {
-  top: auto; bottom: var(--space-8); left: 50%; right: auto;
+  top: var(--space-4); bottom: auto; left: 50%; right: auto;
   transform: translateX(-50%);
   width: auto; height: auto;
   padding: var(--space-2) var(--space-3);
@@ -380,7 +380,19 @@ em, .em {
   background: var(--blue-800);
 }
 .nav.nav-side .nav-cta { display: none; }
-.nav.nav-side .nav-phone { display: none; }
+.nav.nav-side .nav-phone {
+  display: flex;
+  color: var(--blue-800);
+  border-color: var(--border);
+  width: 32px;
+  height: 32px;
+  margin-right: 0;
+  margin-left: var(--space-1);
+}
+.nav.nav-side .nav-phone:hover {
+  background: var(--blue-50);
+  border-color: var(--blue-200);
+}
 .nav.nav-side .menu-toggle { display: none; }
 
 /* Transition: nav vanishing then appearing as side */
@@ -394,7 +406,7 @@ em, .em {
   animation: slideInPill 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 @keyframes slideInPill {
-  from { transform: translateX(-50%) translateY(30px); opacity: 0; }
+  from { transform: translateX(-50%) translateY(-30px); opacity: 0; }
   to { transform: translateX(-50%) translateY(0); opacity: 1; }
 }
 
@@ -822,6 +834,45 @@ body.has-side-nav { padding-left: 0; }
   line-height: 1.5;
 }
 .section-dark .stat-label { color: var(--text-light-muted); }
+
+/* ═══════════════════════════════════════════
+   HIGHLIGHTS — Symbol-based (replaces stats)
+   ═══════════════════════════════════════════ */
+.highlights-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-10);
+  text-align: center;
+}
+.highlight-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.highlight-icon {
+  width: 56px;
+  height: 56px;
+  color: var(--blue-300);
+  margin-bottom: var(--space-6);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.highlight-item h3 {
+  font-size: var(--text-xl);
+  font-weight: 500;
+  color: white;
+  margin-bottom: var(--space-3);
+}
+.highlight-item p {
+  font-size: var(--text-sm);
+  color: var(--text-light-muted);
+  font-weight: 300;
+  line-height: 1.6;
+  max-width: 22ch;
+}
+@media (max-width: 768px) {
+  .highlights-row { grid-template-columns: repeat(2, 1fr); gap: var(--space-8); }
+}
 
 /* ═══════════════════════════════════════════
    SERVICES — EDITORIAL ROWS
