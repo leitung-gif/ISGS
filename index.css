@@ -380,6 +380,7 @@ em, .em {
   background: var(--blue-800);
 }
 .nav.nav-side .nav-cta { display: none; }
+.nav.nav-side .nav-phone { display: none; }
 .nav.nav-side .menu-toggle { display: none; }
 
 /* Transition: nav vanishing then appearing as side */
@@ -438,7 +439,7 @@ body.has-side-nav { padding-left: 0; }
   flex-shrink: 0;
   border-radius: 50%;
 }
-.nav--hero-mode .nav-logo-mark { filter: brightness(10); }
+.nav--hero-mode .nav-logo-mark { filter: brightness(1.8) drop-shadow(0 0 4px rgba(255,255,255,0.3)); }
 .nav--hero-mode.scrolled .nav-logo-mark { filter: none; }
 
 .nav-logo-text { display: flex; flex-direction: column; }
@@ -642,17 +643,17 @@ body.has-side-nav { padding-left: 0; }
 .section-light {
   background-color: var(--bg);
   background-image: url('assets/images/edelweiss-fabric.avif');
-  background-size: 600px;
+  background-size: 800px;
   background-position: center;
-  background-blend-mode: multiply;
+  background-blend-mode: overlay;
   background-repeat: repeat;
 }
 .section-warm {
   background-color: var(--bg-warm);
   background-image: url('assets/images/edelweiss-fabric.avif');
-  background-size: 600px;
+  background-size: 800px;
   background-position: center;
-  background-blend-mode: multiply;
+  background-blend-mode: overlay;
   background-repeat: repeat;
 }
 .section-dark { background: var(--bg-dark); color: white; }
