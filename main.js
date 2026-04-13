@@ -136,4 +136,135 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* ─── LOADING SCREEN ─── */
+  const loader = document.getElementById('siteLoader');
+  if (loader) {
+    setTimeout(() => loader.classList.add('loaded'), 1400);
+    setTimeout(() => loader.remove(), 2200);
+  }
+
+  /* ─── MATTERHORN TRAIL ANIMATION ─── */
+  const trail = document.getElementById('matterhornTrail');
+  if (trail) {
+    const trailObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          trail.classList.add('trail-active');
+          trail.querySelectorAll('[data-trail-step]').forEach((step, i) => {
+            setTimeout(() => step.classList.add('trail-visible'), 400 + i * 500);
+          });
+          trailObs.unobserve(trail);
+        }
+      });
+    }, { threshold: 0.3 });
+    trailObs.observe(trail);
+  }
+
+  /* ─── WEBGL ALPINE LAKE GRADIENT (Beliefs Section) ─── */
+  const beliefsCanvas = document.getElementById('heroCanvas');
+  if (beliefsCanvas) {
+    const gl = beliefsCanvas.getContext('webgl2') || beliefsCanvas.getContext('webgl');
+    if (gl) {
+      let W, H, t = 0, isVis = false;
+
+      function resizeGL() {
+        W = beliefsCanvas.width = beliefsCanvas.clientWidth * Math.min(devicePixelRatio, 1.5);
+        H = beliefsCanvas.height = beliefsCanvas.clientHeight * Math.min(devicePixelRatio, 1.5);
+        gl.viewport(0, 0, W, H);
+      }
+      window.addEventListener('resize', resizeGL);
+
+      const visObs = new IntersectionObserver(e => { isVis = e[0].isIntersecting; }, { threshold: 0 });
+      visObs.observe(beliefsCanvas);
+
+      const vert = `attribute vec2 a_pos; void main() { gl_Position = vec4(a_pos, 0.0, 1.0); }`;
+      const frag = `precision highp float;
+uniform float u_time; uniform vec2 u_res;
+#define PI 3.14159265
+float hash(vec2 p) { p = fract(p * vec2(234.5, 178.3)); p += dot(p, p + 67.21); return fract(p.x * p.y); }
+float noise(vec2 p) { vec2 i = floor(p); vec2 f = fract(p); vec2 u = f*f*f*(f*(f*6.0-15.0)+10.0); return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y); }
+float fbm(vec2 p, int oct) { float v = 0.0, a = 0.55; for(int i = 0; i < 8; i++) { if(i >= oct) break; v += a * noise(p); p = p * 1.95 + vec2(0.9, 1.4); a *= 0.48; } return v; }
+vec3 alpineLake(float t) { vec3 deep=vec3(0.04,0.08,0.18); vec3 navy=vec3(0.08,0.16,0.30); vec3 blue=vec3(0.14,0.30,0.52); vec3 lake=vec3(0.22,0.50,0.72); vec3 sky=vec3(0.42,0.70,0.85); vec3 ice=vec3(0.72,0.88,0.95);
+if(t<0.2) return mix(deep,navy,t*5.0); else if(t<0.4) return mix(navy,blue,(t-0.2)*5.0); else if(t<0.6) return mix(blue,lake,(t-0.4)*5.0); else if(t<0.8) return mix(lake,sky,(t-0.6)*5.0); else return mix(sky,ice,(t-0.8)*5.0); }
+void main() { vec2 uv = gl_FragCoord.xy / u_res; uv.y = 1.0 - uv.y;
+vec2 q = vec2(fbm(uv*2.2+vec2(u_time*0.04,u_time*0.05),5),fbm(uv*2.2+vec2(2.3,7.1)+vec2(u_time*0.045,-u_time*0.035),5));
+vec2 r = vec2(fbm(uv*1.8+3.0*q+vec2(2.1,8.7)+u_time*0.025,5),fbm(uv*1.8+3.0*q+vec2(7.4,3.1)+u_time*0.03,5));
+float f = fbm(uv*1.8+3.0*r,5); f = smoothstep(0.05,0.95,f); vec3 col = alpineLake(clamp(f,0.0,1.0));
+vec2 vp = uv - 0.5; float vign = 1.0 - dot(vp,vp)*1.2; col *= clamp(vign,0.0,1.0);
+float grain = hash(uv+vec2(u_time*0.013))*0.02-0.01; col += grain;
+gl_FragColor = vec4(clamp(col,0.0,1.0), 1.0); }`;
+
+      function compileS(type, src) {
+        const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s;
+      }
+      const prog = gl.createProgram();
+      gl.attachShader(prog, compileS(gl.VERTEX_SHADER, vert));
+      gl.attachShader(prog, compileS(gl.FRAGMENT_SHADER, frag));
+      gl.linkProgram(prog); gl.useProgram(prog);
+
+      const buf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(prog, 'a_pos');
+      gl.enableVertexAttribArray(loc);
+      gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+      const uTime = gl.getUniformLocation(prog, 'u_time');
+      const uRes = gl.getUniformLocation(prog, 'u_res');
+
+      function frame(ts) {
+        requestAnimationFrame(frame);
+        if (!isVis) return;
+        t = ts * 0.001;
+        gl.uniform1f(uTime, t);
+        gl.uniform2f(uRes, W, H);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+      resizeGL();
+      requestAnimationFrame(frame);
+    }
+  }
+
+  /* ─── CTA SECTION — Mini WebGL gradient ─── */
+  document.querySelectorAll('.cta-section').forEach(section => {
+    const cvs = document.createElement('canvas');
+    cvs.className = 'cta-canvas';
+    section.insertBefore(cvs, section.firstChild);
+    const gl2 = cvs.getContext('webgl');
+    if (!gl2) return;
+
+    const vs2 = gl2.createShader(gl2.VERTEX_SHADER);
+    gl2.shaderSource(vs2, 'attribute vec2 p;void main(){gl_Position=vec4(p,0,1);}');
+    gl2.compileShader(vs2);
+    const fs2 = gl2.createShader(gl2.FRAGMENT_SHADER);
+    gl2.shaderSource(fs2, `precision mediump float;
+uniform float t;uniform vec2 r;
+void main(){
+  vec2 u=gl_FragCoord.xy/r;
+  float d=length(u-0.5);
+  float wave=sin(u.x*3.+t*0.4)*0.5+sin(u.y*4.+t*0.3)*0.5;
+  vec3 navy=vec3(0.04,0.06,0.10);
+  vec3 dark=vec3(0.08,0.10,0.15);
+  vec3 gold=vec3(0.76,0.63,0.29);
+  vec3 c=mix(navy,dark,wave*0.5+0.5);
+  c+=gold*smoothstep(0.6,0.0,d)*0.08;
+  gl_FragColor=vec4(c,1.0);
+}`);
+    gl2.compileShader(fs2);
+    const pg2 = gl2.createProgram();
+    gl2.attachShader(pg2, vs2); gl2.attachShader(pg2, fs2); gl2.linkProgram(pg2); gl2.useProgram(pg2);
+    const buf2 = gl2.createBuffer();
+    gl2.bindBuffer(gl2.ARRAY_BUFFER, buf2);
+    gl2.bufferData(gl2.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl2.STATIC_DRAW);
+    const pa2 = gl2.getAttribLocation(pg2, 'p');
+    gl2.enableVertexAttribArray(pa2);
+    gl2.vertexAttribPointer(pa2, 2, gl2.FLOAT, false, 0, 0);
+    const tU2 = gl2.getUniformLocation(pg2, 't');
+    const rU2 = gl2.getUniformLocation(pg2, 'r');
+    function resizeCTA() { cvs.width = cvs.clientWidth; cvs.height = cvs.clientHeight; gl2.viewport(0, 0, cvs.width, cvs.height); }
+    resizeCTA(); window.addEventListener('resize', resizeCTA);
+    function drawCTA(time) { gl2.uniform1f(tU2, time * 0.001); gl2.uniform2f(rU2, cvs.width, cvs.height); gl2.drawArrays(gl2.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(drawCTA); }
+    requestAnimationFrame(drawCTA);
+  });
+
 });
