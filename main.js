@@ -321,5 +321,63 @@
     trailObs.observe(trail);
   }
 
+  // ─── CTA SECTION — Mini WebGL gradient ───
+  document.querySelectorAll('.cta-section').forEach(section => {
+    const canvas = document.createElement('canvas');
+    canvas.className = 'cta-canvas';
+    section.insertBefore(canvas, section.firstChild);
+    const gl = canvas.getContext('webgl');
+    if (!gl) return;
+
+    const vs = gl.createShader(gl.VERTEX_SHADER);
+    gl.shaderSource(vs, 'attribute vec2 p;void main(){gl_Position=vec4(p,0,1);}');
+    gl.compileShader(vs);
+
+    const fs = gl.createShader(gl.FRAGMENT_SHADER);
+    gl.shaderSource(fs, `precision mediump float;
+uniform float t;uniform vec2 r;
+void main(){
+  vec2 u=gl_FragCoord.xy/r;
+  float d=length(u-0.5);
+  float wave=sin(u.x*3.+t*0.4)*0.5+sin(u.y*4.+t*0.3)*0.5;
+  vec3 navy=vec3(0.04,0.08,0.13);
+  vec3 blue=vec3(0.08,0.18,0.35);
+  vec3 gold=vec3(0.76,0.63,0.29);
+  vec3 c=mix(navy,blue,wave*0.5+0.5);
+  c+=gold*smoothstep(0.6,0.0,d)*0.08;
+  gl_FragColor=vec4(c,1.0);
+}`);
+    gl.compileShader(fs);
+
+    const pg = gl.createProgram();
+    gl.attachShader(pg, vs); gl.attachShader(pg, fs); gl.linkProgram(pg); gl.useProgram(pg);
+
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+    const pa = gl.getAttribLocation(pg, 'p');
+    gl.enableVertexAttribArray(pa);
+    gl.vertexAttribPointer(pa, 2, gl.FLOAT, false, 0, 0);
+
+    const tU = gl.getUniformLocation(pg, 't');
+    const rU = gl.getUniformLocation(pg, 'r');
+
+    function resize() {
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function draw(time) {
+      gl.uniform1f(tU, time * 0.001);
+      gl.uniform2f(rU, canvas.width, canvas.height);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
+  });
+
 })();
 
