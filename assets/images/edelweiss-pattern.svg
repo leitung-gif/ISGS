@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="800" viewBox="0 0 800 800" fill="none">
+  <defs>
+    <radialGradient id="pG" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#f5f0e8"/>
+      <stop offset="60%" stop-color="#ede6da"/>
+      <stop offset="100%" stop-color="#d8d0c0"/>
+    </radialGradient>
+    <radialGradient id="pG2" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#f0ebe2"/>
+      <stop offset="100%" stop-color="#d4ccbc"/>
+    </radialGradient>
+    <radialGradient id="cG" cx="45%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#e5cc80"/>
+      <stop offset="50%" stop-color="#d4b55a"/>
+      <stop offset="100%" stop-color="#b89838"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Flower 1: Large, top-left area -->
+  <g transform="translate(120, 80) scale(0.7)" opacity="0.85">
+    <g>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(0 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(51.4 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(102.8 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(154.3 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(205.7 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(257.1 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(308.6 50 50)"/>
+    </g>
+    <g>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(25.7 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(77.1 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(128.6 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(180 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(231.4 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(282.8 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(334.3 50 50)"/>
+    </g>
+    <circle cx="50" cy="50" r="10" fill="url(#cG)"/>
+    <circle cx="50" cy="50" r="7" fill="#d4b55a" opacity="0.5"/>
+  </g>
+
+  <!-- Flower 2: Small, right-center -->
+  <g transform="translate(580, 260) scale(0.35) rotate(20)" opacity="0.65">
+    <g>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(0 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(51.4 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(102.8 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(154.3 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(205.7 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(257.1 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(308.6 50 50)"/>
+    </g>
+    <circle cx="50" cy="50" r="10" fill="url(#cG)"/>
+  </g>
+
+  <!-- Flower 3: Medium, center-left -->
+  <g transform="translate(40, 420) scale(0.5) rotate(-15)" opacity="0.7">
+    <g>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(0 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(51.4 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(102.8 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(154.3 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(205.7 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(257.1 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(308.6 50 50)"/>
+    </g>
+    <g>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(25.7 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(77.1 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(128.6 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(180 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(231.4 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(282.8 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(334.3 50 50)"/>
+    </g>
+    <circle cx="50" cy="50" r="10" fill="url(#cG)"/>
+    <circle cx="50" cy="50" r="7" fill="#d4b55a" opacity="0.5"/>
+  </g>
+
+  <!-- Flower 4: Tiny, upper-right -->
+  <g transform="translate(680, 60) scale(0.25) rotate(45)" opacity="0.55">
+    <g>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(0 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(51.4 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(102.8 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(154.3 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(205.7 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(257.1 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(308.6 50 50)"/>
+    </g>
+    <circle cx="50" cy="50" r="10" fill="url(#cG)"/>
+  </g>
+
+  <!-- Flower 5: Medium-large, bottom-right -->
+  <g transform="translate(500, 580) scale(0.6) rotate(10)" opacity="0.75">
+    <g>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(0 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(51.4 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(102.8 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(154.3 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(205.7 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(257.1 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(308.6 50 50)"/>
+    </g>
+    <g>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(25.7 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(77.1 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(128.6 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(180 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(231.4 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(282.8 50 50)"/>
+      <ellipse cx="50" cy="22" rx="6" ry="20" fill="url(#pG2)" stroke="#d4cabb" stroke-width="0.3" transform="rotate(334.3 50 50)"/>
+    </g>
+    <circle cx="50" cy="50" r="10" fill="url(#cG)"/>
+    <circle cx="50" cy="50" r="7" fill="#d4b55a" opacity="0.5"/>
+  </g>
+
+  <!-- Flower 6: Small, center -->
+  <g transform="translate(320, 350) scale(0.3) rotate(-30)" opacity="0.6">
+    <g>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(0 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(51.4 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(102.8 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(154.3 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(205.7 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(257.1 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(308.6 50 50)"/>
+    </g>
+    <circle cx="50" cy="50" r="10" fill="url(#cG)"/>
+  </g>
+
+  <!-- Flower 7: Tiny, bottom-left -->
+  <g transform="translate(180, 680) scale(0.2) rotate(60)" opacity="0.5">
+    <g>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(0 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(51.4 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(102.8 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(154.3 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(205.7 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(257.1 50 50)"/>
+      <ellipse cx="50" cy="15" rx="9" ry="28" fill="url(#pG)" stroke="#c9bfad" stroke-width="0.5" transform="rotate(308.6 50 50)"/>
+    </g>
+    <circle cx="50" cy="50" r="10" fill="url(#cG)"/>
+  </g>
+</svg>

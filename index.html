@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Immo Schweiz Gruppe | Immobilienvermarktung &amp; Verwaltung in der Schweiz</title>
+  <meta name="description" content="Die Immo Schweiz Gruppe — Ihr Partner für professionelle Immobilienvermarktung, Bewirtschaftung und Beratung in der Schweiz. Seit 2009 in Zürich.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://immoschweizgruppe.ch/">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Immo Schweiz Gruppe | Professionelle Immobiliendienstleistungen">
+  <meta property="og:description" content="Ganzheitliche Immobilienvermarktung, Bewirtschaftung und strategische Beratung — Swiss Made.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_CH">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Immo Schweiz Gruppe GmbH",
+    "url": "https://immoschweizgruppe.ch",
+    "telephone": "+41 44 520 78 24",
+    "email": "info@immoschweizgruppe.ch",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Bahnhofstrasse 42",
+      "addressLocality": "Zürich",
+      "postalCode": "8001",
+      "addressCountry": "CH"
+    },
+    "foundingDate": "2009",
+    "areaServed": "Schweiz"
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="header" id="header">
+    <a href="#" class="logo" aria-label="Immo Schweiz Gruppe — Startseite">
+      <svg class="logo-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="8" width="84" height="84" rx="12" stroke="#333" stroke-width="4" fill="none"/>
+        <text x="50" y="58" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800" font-size="36" fill="#333">ISG</text>
+      </svg>
+      <div class="logo-text">
+        Immo Schweiz
+        <span>Gruppe GmbH</span>
+      </div>
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ═══ MENU OVERLAY ═══ -->
+  <div class="menu-backdrop" id="menuBackdrop"></div>
+  <div class="menu-overlay" id="menuOverlay">
+    <div class="dot-grid" style="top:60px;right:60px;"></div>
+    <nav>
+      <a href="#home" data-nav>Home</a>
+      <a href="#projekte" data-nav>Projekte</a>
+      <a href="#leistungen" data-nav>Leistungen</a>
+      <a href="#ueber-uns" data-nav>Über uns</a>
+      <a href="#team" data-nav>Team</a>
+      <a href="#kontakt" data-nav>Kontakt</a>
+    </nav>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero section" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <div class="dot-grid"></div>
+        <p class="hero-overline">Wir vermarkten Liegenschaften</p>
+        <h1 class="hero-heading">Immobilien Agentur</h1>
+        <p class="hero-subheading">Ganzheitlich und <strong>Swiss Made</strong></p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <a href="#kontakt" class="btn-primary">
+            Beratung anfragen
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#leistungen" class="btn-outline">Unsere Leistungen</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="assets/images/zurich-skyline.jpg" alt="Zürich Skyline — Immobilienstandort Schweiz" loading="eager">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PROJEKTE ═══ -->
+  <section class="section section-white" id="projekte">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="dot-grid"></div>
+        <span class="overline">Ausgewählte</span>
+        <h2 class="section-heading">Projekte</h2>
+      </div>
+
+      <div class="projects-grid">
+        <div class="project-card featured reveal">
+          <img src="assets/images/luxury-interior.jpg" alt="Luxus-Penthouse Zürich — Premium Interieur">
+          <div class="project-card-overlay">
+            <h3>Penthouse Zürich Seefeld</h3>
+            <p>Vermarktung &bull; Premium-Segment</p>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <img src="assets/images/swiss-exterior.jpg" alt="Historische Villa am Zürichsee">
+          <div class="project-card-overlay">
+            <h3>Villa am Zürichsee</h3>
+            <p>Bewertung &bull; Verkauf</p>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <img src="assets/images/modern-building.jpg" alt="Neubau-Projekt Winterthur">
+          <div class="project-card-overlay">
+            <h3>Neubau-Projekt Winterthur</h3>
+            <p>Neubauprojekt &bull; Vermarktung</p>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <img src="assets/images/swiss-interior.jpg" alt="Chalet-Renovation Graubünden">
+          <div class="project-card-overlay">
+            <h3>Chalet Graubünden</h3>
+            <p>Renovation &bull; Beratung</p>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <img src="assets/images/chalet-interior.jpg" alt="Anlageimmobilie Bern">
+          <div class="project-card-overlay">
+            <h3>Anlageimmobilie Bern</h3>
+            <p>Investition &bull; Renditeoptimierung</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ LEISTUNGEN / SERVICES ═══ -->
+  <section class="section services-section section-light" id="leistungen">
+    <div class="container">
+      <div class="services-intro reveal">
+        <div class="dot-grid"></div>
+        <span class="overline">Unsere</span>
+        <h2 class="section-heading">Leistungen</h2>
+        <p style="margin-top:24px;color:var(--text-secondary);max-width:480px;">
+          Von der Bewertung bis zum erfolgreichen Abschluss — wir begleiten Sie mit Erfahrung, Diskretion und einem umfassenden Netzwerk.
+        </p>
+      </div>
+
+      <div class="accordion reveal">
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <div>
+              <span class="accordion-title">Vermarktung</span>
+              <span class="accordion-subtitle">(Verkauf / Vermietung / Off-Market)</span>
+            </div>
+            <span class="accordion-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Professionelle Vermarktung Ihrer Liegenschaft mit Premium-Exposé, virtuellen 360°-Besichtigungen und gezieltem Käufer-Matching.</p>
+              <ul>
+                <li>Professionelle Objektfotografie &amp; Drohnenaufnahmen</li>
+                <li>Digitales Premium-Exposé</li>
+                <li>360° Virtuelle Besichtigung</li>
+                <li>Gezielte Käufer-Qualifizierung</li>
+                <li>Diskrete Off-Market-Vermarktung</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <div>
+              <span class="accordion-title">Bewirtschaftung</span>
+              <span class="accordion-subtitle">(Verwaltung / Mieterbetreuung / Reporting)</span>
+            </div>
+            <span class="accordion-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Ganzheitliche Verwaltung Ihrer Immobilie — transparent, effizient und werterhaltend.</p>
+              <ul>
+                <li>Kaufmännische &amp; technische Verwaltung</li>
+                <li>Mieterbetreuung &amp; Neuvermietung</li>
+                <li>Nebenkostenabrechnung</li>
+                <li>Individuelle Updates für Eigentümer</li>
+                <li>Periodisches Reporting</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <div>
+              <span class="accordion-title">Beratung</span>
+              <span class="accordion-subtitle">(Strategie / Portfolio / Finanzierung)</span>
+            </div>
+            <span class="accordion-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Strategische Beratung für Eigentümer und Investoren — fundiert, unabhängig und massgeschneidert.</p>
+              <ul>
+                <li>Portfolio-Analyse &amp; Optimierung</li>
+                <li>Finanzierungsvorbereitung</li>
+                <li>Steuerliche Strukturierung</li>
+                <li>Versicherungsanalyse</li>
+                <li>Exit-Strategie-Planung</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <div>
+              <span class="accordion-title">Bewertung</span>
+              <span class="accordion-subtitle">(Marktwertanalyse / Gutachten)</span>
+            </div>
+            <span class="accordion-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Präzise Immobilienbewertungen auf Basis fundierter Marktanalysen und lokaler Expertise.</p>
+              <ul>
+                <li>Hedonische &amp; DCF-Bewertungen</li>
+                <li>Vergleichswertverfahren</li>
+                <li>Marktanalyse &amp; Standortbewertung</li>
+                <li>Bankenkonforme Gutachten</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <div>
+              <span class="accordion-title">Investitionen</span>
+              <span class="accordion-subtitle">(Renditeliegenschaften / Anlageimmobilien)</span>
+            </div>
+            <span class="accordion-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Identifikation und Prüfung erstklassiger Anlageimmobilien für langfristigen Vermögensaufbau.</p>
+              <ul>
+                <li>Off-Market-Zugang zu Renditeliegenschaften</li>
+                <li>Due-Diligence-Prüfung</li>
+                <li>Renditeberechnung &amp; Cashflow-Analyse</li>
+                <li>Transaktionsbegleitung</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ÜBER UNS ═══ -->
+  <section class="section section-white about-section" id="ueber-uns">
+    <div class="container">
+      <div class="about-image reveal">
+        <img src="assets/images/office-meeting.jpg" alt="ISG Team im Gespräch — Bahnhofstrasse Zürich">
+      </div>
+      <div class="about-text reveal">
+        <div class="section-header">
+          <div class="dot-grid" style="top:-30px;left:-20px;"></div>
+          <span class="overline">Seit 2009</span>
+          <h2 class="section-heading">Über uns</h2>
+        </div>
+        <p>Die Immo Schweiz Gruppe ist Ihr verlässlicher Partner für anspruchsvolle Immobiliendienstleistungen in der Schweiz.</p>
+        <p>Mit Sitz an der Bahnhofstrasse in Zürich vereinen wir lokale Marktkenntnis mit einem schweizweiten Netzwerk. Unser Ansatz ist geprägt von Diskretion, Präzision und dem Anspruch, für jeden Kunden die optimale Lösung zu finden.</p>
+        <p>Ob Vermarktung, Bewirtschaftung oder strategische Beratung — wir denken ganzheitlich und handeln unternehmerisch. Für uns zählt nicht die Anzahl der Mandate, sondern die Qualität der Ergebnisse.</p>
+
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-number">15+</div>
+            <div class="stat-label">Jahre Erfahrung</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Erfolgreiche Transaktionen</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">CHF 1.2 Mrd.</div>
+            <div class="stat-label">Transaktionsvolumen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TEAM ═══ -->
+  <section class="section section-light" id="team">
+    <div class="container">
+      <div class="section-header reveal" style="text-align:center;">
+        <div class="dot-grid" style="left:50%;transform:translateX(-50%);top:-40px;"></div>
+        <span class="overline">Unser</span>
+        <h2 class="section-heading">Team</h2>
+      </div>
+
+      <div class="team-grid">
+        <div class="team-member reveal">
+          <div class="team-photo">
+            <img src="assets/images/team-thomas.jpg" alt="Thomas Weber — Geschäftsführer">
+          </div>
+          <h3 class="team-name">Thomas Weber</h3>
+          <p class="team-role">Geschäftsführer &amp; Partner</p>
+        </div>
+        <div class="team-member reveal">
+          <div class="team-photo">
+            <img src="assets/images/team-sarah.jpg" alt="Sarah Meier — Leiterin Vermarktung">
+          </div>
+          <h3 class="team-name">Sarah Meier</h3>
+          <p class="team-role">Leiterin Vermarktung</p>
+        </div>
+        <div class="team-member reveal">
+          <div class="team-photo">
+            <img src="assets/images/team-lukas.jpg" alt="Lukas Brunner — Leiter Bewirtschaftung">
+          </div>
+          <h3 class="team-name">Lukas Brunner</h3>
+          <p class="team-role">Leiter Bewirtschaftung</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ KONTAKT ═══ -->
+  <section class="section section-white contact-section" id="kontakt">
+    <div class="container">
+      <div class="contact-info reveal">
+        <div class="section-header">
+          <div class="dot-grid" style="top:-30px;left:-20px;"></div>
+          <span class="overline">Interessantes Projekt?</span>
+          <h2 class="section-heading">Kontakt</h2>
+        </div>
+
+        <div class="contact-block">
+          <h3>Immo Schweiz Gruppe GmbH</h3>
+          <address>Bahnhofstrasse 42, 8001 Zürich</address>
+        </div>
+
+        <div class="contact-block">
+          <p class="label">E-Mail:</p>
+          <a href="mailto:info@immoschweizgruppe.ch">info@immoschweizgruppe.ch</a>
+        </div>
+
+        <div class="contact-block">
+          <p class="label">Telefon:</p>
+          <a href="tel:+41445207824">+41 (0)44 520 78 24</a>
+        </div>
+      </div>
+
+      <form class="contact-form reveal" id="contactForm">
+        <div class="form-row">
+          <div class="form-field">
+            <input type="text" placeholder="Vorname, Nachname" id="formName" required>
+          </div>
+          <div class="form-field">
+            <input type="email" placeholder="E-Mail" id="formEmail" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <input type="tel" placeholder="Telefonnummer" id="formPhone">
+          </div>
+          <div class="form-field">
+            <input type="text" placeholder="Betreff" id="formSubject">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field full">
+            <textarea placeholder="Ihre Mitteilung" id="formMessage" required></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary">
+            Nachricht senden
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-copy">&copy; 2025 Immo Schweiz Gruppe GmbH. Alle Rechte vorbehalten.</p>
+      <div class="footer-links">
+        <a href="#impressum">Impressum</a>
+        <a href="#datenschutz">Datenschutz</a>
+        <a href="#home">Nach oben</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
