@@ -267,4 +267,63 @@ void main(){
     requestAnimationFrame(drawCTA);
   });
 
+  /* ─── EDELWEISS BACKGROUND SCATTER ─── */
+  const edelweissSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+    <g opacity="1">
+      <ellipse cx="50" cy="30" rx="6" ry="14" fill="currentColor" transform="rotate(0 50 50)"/>
+      <ellipse cx="50" cy="30" rx="6" ry="14" fill="currentColor" transform="rotate(72 50 50)"/>
+      <ellipse cx="50" cy="30" rx="6" ry="14" fill="currentColor" transform="rotate(144 50 50)"/>
+      <ellipse cx="50" cy="30" rx="6" ry="14" fill="currentColor" transform="rotate(216 50 50)"/>
+      <ellipse cx="50" cy="30" rx="6" ry="14" fill="currentColor" transform="rotate(288 50 50)"/>
+      <circle cx="50" cy="50" r="6" fill="currentColor" opacity="0.6"/>
+    </g>
+  </svg>`;
+
+  function scatterEdelweiss() {
+    const targets = document.querySelectorAll('.section-light, .section-white, .page-hero');
+    targets.forEach(section => {
+      // Skip sections that already have edelweiss or are too small
+      if (section.querySelector('.edelweiss-bg')) return;
+      const rect = section.getBoundingClientRect();
+      if (rect.height < 200) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'edelweiss-bg';
+      wrapper.setAttribute('aria-hidden', 'true');
+
+      // Number of flowers based on section height
+      const count = Math.max(3, Math.floor(rect.height / 180));
+
+      for (let i = 0; i < count; i++) {
+        const flower = document.createElement('div');
+        flower.className = 'edelweiss-flower-bg';
+        flower.innerHTML = edelweissSVG;
+
+        const size = 20 + Math.random() * 50; // 20–70px
+        const x = 3 + Math.random() * 94;      // 3%–97% horizontal
+        const y = 5 + Math.random() * 85;       // 5%–90% vertical
+        const rotation = Math.random() * 360;
+        const opacity = 0.03 + Math.random() * 0.05; // Very subtle
+        const delay = Math.random() * 8;
+        const duration = 12 + Math.random() * 12;
+
+        flower.style.cssText = `
+          width: ${size}px; height: ${size}px;
+          left: ${x}%; top: ${y}%;
+          transform: rotate(${rotation}deg);
+          opacity: ${opacity};
+          animation-delay: ${delay}s;
+          animation-duration: ${duration}s;
+        `;
+
+        wrapper.appendChild(flower);
+      }
+
+      section.style.position = 'relative';
+      section.appendChild(wrapper);
+    });
+  }
+
+  scatterEdelweiss();
+
 });
