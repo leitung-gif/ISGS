@@ -1184,7 +1184,7 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
 .hero > .container { position: relative; z-index: 1; }
 
 /* ═══════════════════════════════════════════════════
-   RESPONSIVE
+   RESPONSIVE — iPad (1024px)
    ═══════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
   .hero .container { grid-template-columns: 1fr; text-align: center; }
@@ -1193,7 +1193,7 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
   .about-section .container { grid-template-columns: 1fr; }
   .contact-section .container { grid-template-columns: 1fr; }
   .menu-overlay { width: 100%; }
-  .hero-video-content { max-width: 100%; }
+  .hero-video-content { max-width: 80%; }
   .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
   .projects-trio { grid-template-columns: 1fr 1fr; }
   .nav-links-desktop { display: none; }
@@ -1225,14 +1225,31 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE — Tablet / Mobile (768px)
+   ═══════════════════════════════════════════════════ */
 @media (max-width: 768px) {
   :root {
-    --section-py: clamp(60px, 8vw, 80px);
+    --section-py: clamp(50px, 8vw, 70px);
   }
 
-  /* Hero */
+  /* Header — smaller logo */
+  .logo-icon { width: 36px; height: 36px; }
+  .logo-text { font-size: 0.95rem; }
+  .logo-text span { font-size: 0.6rem; }
+  .header { padding: 20px var(--container-px); }
+  .header.scrolled { padding: 12px var(--container-px); }
+
+  /* Hero — main page */
   .hero-heading { font-size: clamp(2.2rem, 9vw, 3.5rem); }
   .hero { min-height: 85vh; }
+  .hero-subheading { font-size: clamp(1.1rem, 3vw, 1.5rem); margin-bottom: 24px; }
+
+  /* Hero — video subpages */
+  .hero-video { min-height: 70vh; }
+  .hero-video-content { max-width: 100%; padding: 0 var(--container-px) clamp(3rem, 6vw, 5rem); }
+  .hero-video-content .hero-heading { font-size: clamp(2rem, 8vw, 3rem); }
+  .hero-video-content .hero-subheading { font-size: clamp(1rem, 3vw, 1.4rem); }
 
   /* Projects */
   .projects-grid { grid-template-columns: 1fr; }
@@ -1254,8 +1271,11 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
   }
   .team-desc { font-size: 0.8rem; }
 
+  /* About center image */
+  .about-center img { border-radius: 16px; }
+
   /* Stats */
-  .stats-row { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); gap: 16px; }
 
   /* Forms */
   .form-row { grid-template-columns: 1fr; }
@@ -1267,30 +1287,47 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
 
   /* Mountain trail */
   .matterhorn-trail { min-height: 400px; }
-  .trail-card { max-width: 180px; padding: 0.85rem; }
-  .trail-card h3 { font-size: 0.85rem; }
-  .trail-card p { font-size: 0.75rem; }
-  .trail-step-1 { left: 3%; }
-  .trail-step-2 { right: 2%; }
-  .trail-step-3 { left: 2%; }
-  .trail-step-4 { right: 2%; }
+  .trail-card { max-width: 160px; padding: 0.75rem; }
+  .trail-card h3 { font-size: 0.8rem; }
+  .trail-card p { font-size: 0.7rem; }
+  .trail-step-1 { left: 2%; }
+  .trail-step-2 { right: 1%; }
+  .trail-step-3 { left: 1%; }
+  .trail-step-4 { right: 1%; }
 
   /* CTA */
-  .cta-section { padding: 5rem 0; }
-  .cta-section h2 { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+  .cta-section { padding: 4rem 0; }
+  .cta-section h2 { font-size: clamp(1.6rem, 6vw, 2.2rem); }
   .cta-buttons { flex-direction: column; align-items: center; }
   .cta-buttons a { width: 100%; max-width: 320px; text-align: center; justify-content: center; }
 
+  /* Subpage sections */
+  .about-section .container,
+  .contact-section .container { gap: 2rem; }
+  .service-card-dark { padding: 1.5rem; }
+
   /* Diamond → centered, smaller on mobile */
   #heroCanvas3D {
-    opacity: 0.6;
+    opacity: 0.5;
   }
+
+  /* WhatsApp FAB smaller */
+  .whatsapp-fab { width: 48px; height: 48px; bottom: 16px; right: 16px; }
+  .whatsapp-fab svg { width: 24px; height: 24px; }
 }
 
+/* ═══════════════════════════════════════════════════
+   RESPONSIVE — Small Mobile (480px)
+   ═══════════════════════════════════════════════════ */
 @media (max-width: 480px) {
   .stats-row { grid-template-columns: 1fr; text-align: center; }
-  .hero-heading { font-size: clamp(2rem, 10vw, 2.8rem); }
+  .hero-heading { font-size: clamp(1.8rem, 10vw, 2.5rem); }
+  .hero-video-content .hero-heading { font-size: clamp(1.8rem, 9vw, 2.5rem); }
   
+  /* Hero video even smaller */
+  .hero-video { min-height: 60vh; }
+  .hero-video-content { padding: 0 16px 2.5rem; }
+
   /* Ultra-small: team cards vertical */
   .team-card {
     flex-direction: column;
@@ -1314,7 +1351,21 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
     border-radius: 14px;
   }
 
+  /* Trail compact */
+  .matterhorn-trail { min-height: 300px; }
+  .trail-card { max-width: 130px; padding: 0.5rem; }
+  .trail-number { width: 24px; height: 24px; font-size: 0.6rem; }
+
+  /* Section headings */
+  .section-heading { font-size: clamp(1.5rem, 6vw, 2rem); }
+
   /* Footer compact */
   .footer { padding: 3rem 0 2rem; }
   .footer-legal { flex-direction: column; gap: 0.5rem; text-align: center; }
+
+  /* Header ultra compact */
+  .logo-icon { width: 32px; height: 32px; }
+  .logo-text { font-size: 0.85rem; }
+  .header { padding: 16px 16px; }
+  .header.scrolled { padding: 10px 16px; }
 }
