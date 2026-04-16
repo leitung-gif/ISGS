@@ -378,6 +378,52 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
 .section-white { background: transparent; }
 .section-gray { background: transparent; }
 
+/* Featured Project — single project highlight */
+.project-featured {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.project-featured-image {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+}
+.project-featured-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s ease;
+}
+.project-featured:hover .project-featured-image img {
+  transform: scale(1.03);
+}
+.project-featured-text .overline { margin-bottom: 0.75rem; }
+.project-featured-text .section-heading { margin-bottom: 1.5rem; }
+.project-featured-text p { color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
+.project-meta {
+  font-size: var(--fs-small);
+  color: var(--gold);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  margin-top: 1rem;
+}
+
+/* Team Edelweiss Section — fabric backdrop */
+.team-edelweiss-section {
+  position: relative;
+}
+.team-edelweiss-section::before {
+  content: '';
+  position: absolute;
+  inset: -2rem;
+  background: radial-gradient(ellipse at center, rgba(196,162,74,0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .section-header {
   position: relative;
   margin-bottom: clamp(48px, 5vw, 80px);
@@ -1044,6 +1090,7 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
   .hero-video-content { max-width: 100%; }
   .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
   .projects-trio { grid-template-columns: 1fr 1fr; }
+  .project-featured { grid-template-columns: 1fr; gap: 2rem; }
   .nav-links-desktop { display: none; }
   .nav-cta-btn { display: none; }
 }
@@ -1051,6 +1098,7 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
 @media (max-width: 768px) {
   .projects-grid { grid-template-columns: 1fr; }
   .projects-trio { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
+  .project-featured { grid-template-columns: 1fr; gap: 1.5rem; }
   .project-card.featured { grid-column: span 1; }
   .project-card-scroll { aspect-ratio: 4 / 5; }
   .team-grid { grid-template-columns: 1fr; gap: 30px; }
