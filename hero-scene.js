@@ -78,7 +78,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
     color: 0xffffff,
     metalness: 0.0,
     roughness: 0.0,
-    transmission: 0.92,       // glass transparency
+    transmission: 0.6,        // less see-through, more solid
     thickness: 2.0,           // refraction depth
     ior: 2.42,                // real diamond IOR
     clearcoat: 1.0,
@@ -98,7 +98,15 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   diamond.scale.set(0.9, 0.9, 0.9);
   scene.add(diamond);
 
-  /* (wireframe removed for clean look) */
+  /* ─── CLEAN FACET EDGES ─── */
+  const edgesGeo = new THREE.EdgesGeometry(diamondGeo, 15);
+  const edgeLines = new THREE.LineSegments(edgesGeo, new THREE.LineBasicMaterial({
+    color: 0xccbbaa,
+    transparent: true,
+    opacity: 0.35
+  }));
+  edgeLines.scale.set(0.9, 0.9, 0.9);
+  scene.add(edgeLines);
 
   /* ─── SCROLL ─── */
   let scrollTarget = 0, scrollSmooth = 0;
@@ -121,17 +129,21 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
 
     // Slow majestic rotation
     diamond.rotation.y = t * 0.15 + scrollSmooth * Math.PI * 0.6;
+    edgeLines.rotation.y = diamond.rotation.y;
 
     // Gentle tilt
     diamond.rotation.x = Math.sin(t * 0.07) * 0.06;
+    edgeLines.rotation.x = diamond.rotation.x;
 
     // Floating hover (schweben)
     const floatY = Math.sin(t * 0.35) * 0.12 + Math.sin(t * 0.17) * 0.05;
     diamond.position.y = floatY;
+    edgeLines.position.y = floatY;
 
-    // Drift: starts right-center, moves center on scroll
+    // Drift
     const driftX = 1.2 - scrollSmooth * 1.0;
     diamond.position.x = driftX;
+    edgeLines.position.x = driftX;
 
     // Opacity fades through page
     const opTarget = scrollSmooth < 0.1 ? 0.95 :
@@ -150,6 +162,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
     // Scale
     const s = 0.9 + scrollSmooth * 0.1;
     diamond.scale.set(s, s, s);
+    edgeLines.scale.set(s, s, s);
 
     renderer.render(scene, camera);
   }
