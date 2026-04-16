@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════
-   IMMO SCHWEIZ GRUPPE — Red Diamond + Swiss Cross
-   Swiss red with white 6:7:6:7:6 cross on flat table
+   IMMO SCHWEIZ GRUPPE — Bold Red Diamond + Swiss Cross
+   Deep red, sharp facets, cross flat on table
    ═══════════════════════════════════════════════════ */
 
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
@@ -8,187 +8,180 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
 (function () {
   const canvas = document.getElementById('heroCanvas3D');
   if (!canvas) return;
-
   canvas.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;';
 
-  /* ─── RENDERER ─── */
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.3;
+  renderer.toneMappingExposure = 1.4;
 
-  /* ─── SCENE & CAMERA ─── */
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(30, window.innerWidth / window.innerHeight, 0.1, 100);
-  camera.position.set(2, 2, 6);
-  camera.lookAt(0, 0, 0);
+  const camera = new THREE.PerspectiveCamera(28, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.set(0, 2.5, 7);
+  camera.lookAt(0, -0.2, 0);
 
   /* ─── ENV MAP ─── */
   const pmrem = new THREE.PMREMGenerator(renderer);
-  const envScene = new THREE.Scene();
-  envScene.background = new THREE.Color(0xf8f5f0);
-  [[0,8,0,12,0xffffff],[6,3,4,8,0xffffff],[-5,2,-3,6,0xffeedd],[0,-4,5,10,0xffffff],[3,1,-6,5,0xffcccc],[-4,4,2,5,0xffdddd],[4,-2,-4,3,0xD4242B]].forEach(([x,y,z,s,c]) => {
+  const envS = new THREE.Scene();
+  envS.background = new THREE.Color(0xf0e8e0);
+  [[0,8,0,14,0xffffff],[6,2,5,8,0xfff0e0],[-5,3,-4,7,0xffeedd],
+   [0,-5,4,12,0xffffff],[3,0,-7,5,0xffcccc],[-3,6,3,4,0xD4242B],
+   [5,-3,-3,4,0xaa1111]].forEach(([x,y,z,s,c]) => {
     const m = new THREE.Mesh(new THREE.PlaneGeometry(s,s), new THREE.MeshBasicMaterial({color:c,side:THREE.DoubleSide}));
-    m.position.set(x,y,z); m.lookAt(0,0,0); envScene.add(m);
+    m.position.set(x,y,z); m.lookAt(0,0,0); envS.add(m);
   });
-  const envMap = pmrem.fromScene(envScene, 0.02).texture;
+  const envMap = pmrem.fromScene(envS, 0.02).texture;
   pmrem.dispose();
 
-  /* ─── LIGHTING ─── */
-  scene.add(new THREE.AmbientLight(0xffffff, 0.7));
-  const key = new THREE.DirectionalLight(0xffffff, 3.5);
-  key.position.set(3, 6, 4); scene.add(key);
-  const fill = new THREE.DirectionalLight(0xffeedd, 1.8);
-  fill.position.set(-4, 3, 5); scene.add(fill);
-  const rim = new THREE.DirectionalLight(0xffaaaa, 1.2);
-  rim.position.set(-1, -2, -5); scene.add(rim);
-  const top = new THREE.PointLight(0xffffff, 2.5, 15);
-  top.position.set(0, 6, 0); scene.add(top);
-  const redGlow = new THREE.PointLight(0xD4242B, 1.5, 12);
-  redGlow.position.set(0, -3, 2); scene.add(redGlow);
+  /* ─── LIGHTING — dramatic ─── */
+  scene.add(new THREE.AmbientLight(0xfff0f0, 0.4));
+  const key = new THREE.DirectionalLight(0xffffff, 4.0);
+  key.position.set(4, 8, 5); scene.add(key);
+  const fill = new THREE.DirectionalLight(0xffddcc, 2.0);
+  fill.position.set(-5, 3, 4); scene.add(fill);
+  const rim = new THREE.DirectionalLight(0xff4444, 1.5);
+  rim.position.set(0, -3, -6); scene.add(rim);
+  const spot = new THREE.PointLight(0xffffff, 3.0, 15);
+  spot.position.set(0, 8, 0); scene.add(spot);
+  const redUp = new THREE.PointLight(0xD4242B, 2.0, 10);
+  redUp.position.set(0, -4, 1); scene.add(redUp);
 
-  /* ─── DIAMOND GEOMETRY — Brilliant Cut ─── */
+  /* ─── DIAMOND GEO — 6-sided (hexagonal) for sharp edges ─── */
   const profile = [
-    new THREE.Vector2(0.001, -1.4),
-    new THREE.Vector2(1.15,  -0.05),
-    new THREE.Vector2(1.2,    0.0),
-    new THREE.Vector2(1.15,   0.05),
-    new THREE.Vector2(0.72,   0.35),
-    new THREE.Vector2(0.65,   0.38),
-    new THREE.Vector2(0.001,  0.38),
+    new THREE.Vector2(0.001, -1.5),   // culet point
+    new THREE.Vector2(1.2,  -0.05),   // pavilion to girdle
+    new THREE.Vector2(1.25,   0.0),   // girdle
+    new THREE.Vector2(1.2,   0.05),   // girdle to crown
+    new THREE.Vector2(0.75,   0.38),  // crown
+    new THREE.Vector2(0.68,   0.42),  // table edge
+    new THREE.Vector2(0.001,  0.42),  // table center
   ];
-  const diamondGeo = new THREE.LatheGeometry(profile, 8);
+  const diamondGeo = new THREE.LatheGeometry(profile, 6); // 6 = hexagonal, very sharp
   diamondGeo.computeVertexNormals();
 
-  /* ─── DIAMOND MATERIAL — Swiss Red, mostly solid ─── */
+  /* ─── DIAMOND MAT — bold, solid red ─── */
   const diamondMat = new THREE.MeshPhysicalMaterial({
-    color: 0xC42028,
-    metalness: 0.1,
-    roughness: 0.05,
-    transmission: 0.15,
-    thickness: 2.5,
-    ior: 2.42,
+    color: 0xAA1520,
+    metalness: 0.25,
+    roughness: 0.08,
+    transmission: 0.0,        // NO transparency — solid
     clearcoat: 1.0,
     clearcoatRoughness: 0.0,
-    envMap: envMap,
-    envMapIntensity: 3.5,
+    envMap,
+    envMapIntensity: 3.0,
     specularIntensity: 1.0,
     specularColor: new THREE.Color(0xffffff),
-    attenuationColor: new THREE.Color(0xD4242B),
-    attenuationDistance: 1.5,
+    emissive: 0x330808,
+    emissiveIntensity: 0.3,
     transparent: true,
-    opacity: 0.92,
+    opacity: 0.95,
     side: THREE.DoubleSide,
   });
 
-  /* ─── MAIN GROUP ─── */
   const group = new THREE.Group();
-
   const diamond = new THREE.Mesh(diamondGeo, diamondMat);
   group.add(diamond);
 
-  /* ─── FACET EDGES ─── */
-  const edgesGeo = new THREE.EdgesGeometry(diamondGeo, 15);
+  /* ─── SHARP WHITE EDGES ─── */
+  const edgesGeo = new THREE.EdgesGeometry(diamondGeo, 10);
   const edgeLines = new THREE.LineSegments(edgesGeo, new THREE.LineBasicMaterial({
-    color: 0xffffff,
-    transparent: true,
-    opacity: 0.15
+    color: 0xffffff, transparent: true, opacity: 0.25
   }));
   group.add(edgeLines);
 
-  /* ─── SWISS CROSS — 6:7:6:7:6 proportions on the table ─── */
-  // Official Swiss cross: total grid 32 units
-  // Cross arm width = 7/32, arm length = 20/32 (6 margin each side)
-  // Positioned on the flat table (y = 0.38) of the diamond
-  const unit = 0.65 / 32; // scale to match table radius (~0.65)
-  const armW = 7 * unit;   // 0.142
-  const armL = 20 * unit;  // 0.406
+  /* ─── SWISS CROSS — 6:7:6:7:6, FLAT on table (XZ plane) ─── */
+  const unit = 0.68 / 32;
+  const armW = 7 * unit;
+  const armL = 20 * unit;
+  const crossH = 0.018; // very thin
 
   const crossMat = new THREE.MeshPhysicalMaterial({
     color: 0xffffff,
     metalness: 0.0,
-    roughness: 0.3,
-    clearcoat: 0.5,
-    envMap: envMap,
-    envMapIntensity: 1.0,
+    roughness: 0.2,
+    clearcoat: 0.6,
+    envMap,
+    envMapIntensity: 1.5,
+    emissive: 0xffffff,
+    emissiveIntensity: 0.1,
     transparent: true,
-    opacity: 0.75,
+    opacity: 0.8,
     side: THREE.DoubleSide,
   });
 
-  const crossGroup = new THREE.Group();
-  // Horizontal bar
-  const hBar = new THREE.BoxGeometry(armL, 0.015, armW);
-  crossGroup.add(new THREE.Mesh(hBar, crossMat));
-  // Vertical bar
-  const vBar = new THREE.BoxGeometry(armW, 0.015, armL);
-  crossGroup.add(new THREE.Mesh(vBar, crossMat));
+  // Bars in XZ plane (NO rotation needed — they're already flat)
+  const hBar = new THREE.Mesh(new THREE.BoxGeometry(armL, crossH, armW), crossMat);
+  const vBar = new THREE.Mesh(new THREE.BoxGeometry(armW, crossH, armL), crossMat);
 
-  // Position on diamond table + slight float above
-  crossGroup.position.y = 0.40;
-  crossGroup.rotation.x = -Math.PI / 2; // lay flat on table
+  const crossGroup = new THREE.Group();
+  crossGroup.add(hBar);
+  crossGroup.add(vBar);
+  crossGroup.position.y = 0.43; // just above table surface
   group.add(crossGroup);
 
-  /* ─── Scale up — more present ─── */
-  group.scale.set(1.15, 1.15, 1.15);
+  /* ─── SCALE ─── */
+  group.scale.set(1.3, 1.3, 1.3);
   scene.add(group);
 
   /* ─── SCROLL ─── */
   let scrollTarget = 0, scrollSmooth = 0;
-  function onScroll() {
+  window.addEventListener('scroll', () => {
     const max = document.documentElement.scrollHeight - window.innerHeight;
     scrollTarget = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
+  }, { passive: true });
 
-  /* ─── ANIMATE ─── */
+  /* ─── ANIMATE — upgraded dynamics ─── */
   const clock = new THREE.Clock();
   let running = true;
 
   function animate() {
     if (!running) return;
     requestAnimationFrame(animate);
-
     const t = clock.getElapsedTime();
-    scrollSmooth += (scrollTarget - scrollSmooth) * 0.03;
+    scrollSmooth += (scrollTarget - scrollSmooth) * 0.04;
 
-    // Slow majestic rotation
-    group.rotation.y = t * 0.12 + scrollSmooth * Math.PI * 0.6;
+    // Rotation: steady spin + scroll acceleration
+    group.rotation.y = t * 0.18 + scrollSmooth * Math.PI * 0.8;
 
-    // Gentle tilt
-    group.rotation.x = Math.sin(t * 0.07) * 0.05;
+    // Dynamic tilt — more lively
+    group.rotation.x = Math.sin(t * 0.09) * 0.08 + Math.sin(t * 0.22) * 0.03;
+    group.rotation.z = Math.sin(t * 0.12) * 0.02;
 
-    // Floating hover
-    const floatY = Math.sin(t * 0.35) * 0.1 + Math.sin(t * 0.17) * 0.04;
-    group.position.y = floatY;
+    // Float with subtle bounce
+    group.position.y = Math.sin(t * 0.4) * 0.1 + Math.sin(t * 0.19) * 0.06;
 
-    // Drift: right → center on scroll
-    group.position.x = 1.2 - scrollSmooth * 1.0;
+    // Drift right → center
+    group.position.x = 1.5 - scrollSmooth * 1.3;
 
-    // Opacity fades
-    const opTarget = scrollSmooth < 0.1 ? 0.92 :
-                     scrollSmooth < 0.35 ? 0.78 :
-                     scrollSmooth < 0.6  ? 0.5 : 0.25;
-    diamondMat.opacity += (opTarget - diamondMat.opacity) * 0.04;
-    edgeLines.material.opacity = diamondMat.opacity * 0.18;
-    crossMat.opacity = diamondMat.opacity * 0.8;
+    // Opacity
+    const opTarget = scrollSmooth < 0.1 ? 0.95 :
+                     scrollSmooth < 0.3 ? 0.82 :
+                     scrollSmooth < 0.6 ? 0.55 : 0.3;
+    diamondMat.opacity += (opTarget - diamondMat.opacity) * 0.05;
+    edgeLines.material.opacity = diamondMat.opacity * 0.28;
+    crossMat.opacity = Math.min(diamondMat.opacity * 0.85, 0.8);
+
+    // Emissive pulse — diamond breathes red
+    const pulse = 0.25 + Math.sin(t * 0.7) * 0.1;
+    diamondMat.emissiveIntensity = pulse;
+
+    // Cross glow pulse
+    crossMat.emissiveIntensity = 0.08 + Math.sin(t * 0.5) * 0.04;
 
     // Scale
-    const s = 1.15 + scrollSmooth * 0.1;
+    const s = 1.3 + scrollSmooth * 0.1;
     group.scale.set(s, s, s);
 
     renderer.render(scene, camera);
   }
 
-  /* ─── RESIZE ─── */
   function onResize() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
   }
   window.addEventListener('resize', onResize, { passive: true });
-
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) { running = false; }
     else { running = true; clock.start(); animate(); }
