@@ -47,14 +47,14 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   pmrem.dispose();
 
   /* ─── LIGHTING ─── */
-  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-  const key = new THREE.DirectionalLight(0xffffff, 3.0);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+  const key = new THREE.DirectionalLight(0xffffff, 4.0);
   key.position.set(3, 5, 4); scene.add(key);
-  const fill = new THREE.DirectionalLight(0xffeedd, 1.5);
+  const fill = new THREE.DirectionalLight(0xffeedd, 2.0);
   fill.position.set(-4, 3, 3); scene.add(fill);
-  const rim = new THREE.DirectionalLight(0xD4242B, 1.2);
+  const rim = new THREE.DirectionalLight(0xD4242B, 1.5);
   rim.position.set(-1, -2, -5); scene.add(rim);
-  const top = new THREE.PointLight(0xffffff, 2.0, 15);
+  const top = new THREE.PointLight(0xffffff, 3.0, 15);
   top.position.set(0, 6, 0); scene.add(top);
 
   /* ─── DIAMOND GEOMETRY — Brilliant Cut Profile via LatheGeometry ─── */
@@ -84,7 +84,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
     clearcoat: 1.0,
     clearcoatRoughness: 0.0,
     envMap: envMap,
-    envMapIntensity: 3.0,
+    envMapIntensity: 5.0,
     specularIntensity: 1.0,
     specularColor: new THREE.Color(0xD4242B), // RED specular fire
     attenuationColor: new THREE.Color(0xffcccc), // subtle warm internal tint
@@ -95,19 +95,10 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   });
 
   const diamond = new THREE.Mesh(diamondGeo, diamondMat);
-  diamond.scale.set(1.2, 1.2, 1.2);
+  diamond.scale.set(0.9, 0.9, 0.9);
   scene.add(diamond);
 
-  /* ─── SPARKLE EDGES — subtle red wireframe for facet definition ─── */
-  const edgeMat = new THREE.MeshBasicMaterial({
-    color: 0xD4242B,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.06
-  });
-  const edges = new THREE.Mesh(diamondGeo.clone(), edgeMat);
-  edges.scale.set(1.205, 1.205, 1.205);
-  scene.add(edges);
+  /* (wireframe removed for clean look) */
 
   /* ─── SCROLL ─── */
   let scrollTarget = 0, scrollSmooth = 0;
@@ -130,28 +121,23 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
 
     // Slow majestic rotation
     diamond.rotation.y = t * 0.15 + scrollSmooth * Math.PI * 0.6;
-    edges.rotation.y = diamond.rotation.y;
 
     // Gentle tilt
     diamond.rotation.x = Math.sin(t * 0.07) * 0.06;
-    edges.rotation.x = diamond.rotation.x;
 
     // Floating hover (schweben)
     const floatY = Math.sin(t * 0.35) * 0.12 + Math.sin(t * 0.17) * 0.05;
     diamond.position.y = floatY;
-    edges.position.y = floatY;
 
-    // Drift: starts right, moves center on scroll
-    const driftX = 1.8 - scrollSmooth * 1.5;
+    // Drift: starts right-center, moves center on scroll
+    const driftX = 1.2 - scrollSmooth * 1.0;
     diamond.position.x = driftX;
-    edges.position.x = driftX;
 
     // Opacity fades through page
     const opTarget = scrollSmooth < 0.1 ? 0.95 :
                      scrollSmooth < 0.35 ? 0.8 :
                      scrollSmooth < 0.6  ? 0.5 : 0.25;
     diamondMat.opacity += (opTarget - diamondMat.opacity) * 0.04;
-    edgeMat.opacity = diamondMat.opacity * 0.07;
 
     // Red specular intensifies on scroll
     const redIntensity = 0.8 + scrollSmooth * 0.5;
@@ -162,9 +148,8 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
     );
 
     // Scale
-    const s = 1.2 + scrollSmooth * 0.15;
+    const s = 0.9 + scrollSmooth * 0.1;
     diamond.scale.set(s, s, s);
-    edges.scale.set(s * 1.004, s * 1.004, s * 1.004);
 
     renderer.render(scene, camera);
   }
