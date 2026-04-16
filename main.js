@@ -272,7 +272,7 @@ gl_FragColor = vec4(clamp(col,0.0,1.0), 1.0); }`;
       const x = 2 + Math.random() * 96;
       const y = 2 + Math.random() * 96;
       const rot = Math.random() * 360;
-      const maxOpacity = 0.03 + Math.random() * 0.04;
+      const maxOpacity = 0.045 + Math.random() * 0.055;
       const delay = Math.random() * 12;
       const duration = 16 + Math.random() * 16;
 
