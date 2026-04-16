@@ -1170,29 +1170,125 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
   .hero-video-content { max-width: 100%; }
   .pricing-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
   .projects-trio { grid-template-columns: 1fr 1fr; }
-  .project-featured { grid-template-columns: 1fr; gap: 2rem; }
   .nav-links-desktop { display: none; }
   .nav-cta-btn { display: none; }
+
+  /* Right-aligned layouts → full width */
+  .projekte-layout,
+  .leistungen-layout,
+  .team-layout {
+    max-width: 100%;
+    margin-left: 0;
+  }
+  .projekte-header,
+  .leistungen-header,
+  .team-header {
+    text-align: left;
+  }
+  .projekte-header p,
+  .leistungen-header p,
+  .team-header p {
+    margin-left: 0;
+  }
+  .project-meta { text-align: left; }
+
+  /* About center → full width */
+  .about-center { max-width: 100% !important; }
+
+  /* Footer 2 columns */
+  .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 768px) {
+  :root {
+    --section-py: clamp(60px, 8vw, 80px);
+  }
+
+  /* Hero */
+  .hero-heading { font-size: clamp(2.2rem, 9vw, 3.5rem); }
+  .hero { min-height: 85vh; }
+
+  /* Projects */
   .projects-grid { grid-template-columns: 1fr; }
   .projects-trio { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; }
-  .project-featured { grid-template-columns: 1fr; gap: 1.5rem; }
   .project-card.featured { grid-column: span 1; }
   .project-card-scroll { aspect-ratio: 4 / 5; }
-  .team-grid { grid-template-columns: 1fr; gap: 30px; }
+
+  /* Leistungen cards → single column */
+  .leistungen-cards { grid-template-columns: 1fr; }
+  .leistungen-layout { align-items: stretch; }
+
+  /* Team cards → full width, smaller photos */
+  .team-card { 
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+  .team-card .team-photo {
+    width: 64px; height: 64px;
+  }
+  .team-desc { font-size: 0.8rem; }
+
+  /* Stats */
   .stats-row { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+  /* Forms */
   .form-row { grid-template-columns: 1fr; }
   .form-field.full { grid-column: span 1; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Footer → single column */
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-  .hero-heading { font-size: clamp(2.5rem, 10vw, 4rem); }
-  .matterhorn-trail { min-height: 500px; }
-  .trail-card { max-width: 200px; padding: 1rem; }
+
+  /* Mountain trail */
+  .matterhorn-trail { min-height: 400px; }
+  .trail-card { max-width: 180px; padding: 0.85rem; }
+  .trail-card h3 { font-size: 0.85rem; }
+  .trail-card p { font-size: 0.75rem; }
+  .trail-step-1 { left: 3%; }
+  .trail-step-2 { right: 2%; }
+  .trail-step-3 { left: 2%; }
+  .trail-step-4 { right: 2%; }
+
+  /* CTA */
+  .cta-section { padding: 5rem 0; }
+  .cta-section h2 { font-size: clamp(1.8rem, 6vw, 2.5rem); }
+  .cta-buttons { flex-direction: column; align-items: center; }
+  .cta-buttons a { width: 100%; max-width: 320px; text-align: center; justify-content: center; }
+
+  /* Diamond → centered, smaller on mobile */
+  #heroCanvas3D {
+    opacity: 0.6;
+  }
 }
 
 @media (max-width: 480px) {
   .stats-row { grid-template-columns: 1fr; text-align: center; }
-}
+  .hero-heading { font-size: clamp(2rem, 10vw, 2.8rem); }
+  
+  /* Ultra-small: team cards vertical */
+  .team-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem 1rem;
+  }
+  .team-card .team-photo {
+    width: 72px; height: 72px;
+  }
+  .team-info { text-align: center; }
 
+  /* Buttons full width */
+  .btn-primary, .btn-outline, .btn-gold {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  /* Feature image smaller ratio */
+  .project-featured-image {
+    border-radius: 14px;
+  }
+
+  /* Footer compact */
+  .footer { padding: 3rem 0 2rem; }
+  .footer-legal { flex-direction: column; gap: 0.5rem; text-align: center; }
+}

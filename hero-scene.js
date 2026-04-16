@@ -100,20 +100,25 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
      ═══════════════════════════════════════════════════ */
   // Each keyframe: [scrollProgress, x, y, scale, opacity]
   // Scroll progress is based on section positions (computed dynamically)
-  const keyframes = [
-    { id: 'home',        x:  1.5,  y: 0,   scale: 1.17, opacity: 0.95 },
-    { id: 'projekte',    x: -1.5,  y: 0,   scale: 1.17, opacity: 0.92 },
-    { id: 'matterhorn',  x:  1.8,  y: -0.3,scale: 0.58, opacity: 0.85 },
-    { id: 'leistungen',  x: -1.8,  y: 0,   scale: 0.85, opacity: 0.90 },
-    { id: 'ueber-uns',   x:  1.5,  y: 0,   scale: 1.0,  opacity: 0.92 },
-    { id: 'team',        x: -1.8,  y: 0,   scale: 0.9,  opacity: 0.88 },
-    { id: 'kontakt',     x:  0.0,  y: 2.0, scale: 0.7,  opacity: 0.0  },
-  ];
+  const isMobile = () => window.innerWidth <= 768;
+
+  function getKeyframes() {
+    const m = isMobile();
+    return [
+      { id: 'home',        x: m ?  0.0 :  1.5,  y: 0,    scale: m ? 0.85 : 1.17, opacity: 0.95 },
+      { id: 'projekte',    x: m ?  0.0 : -1.5,  y: 0,    scale: m ? 0.7  : 1.17, opacity: 0.80 },
+      { id: 'matterhorn',  x: m ?  0.0 :  1.8,  y: -0.3, scale: m ? 0.4  : 0.58, opacity: 0.70 },
+      { id: 'leistungen',  x: m ?  0.0 : -1.8,  y: 0,    scale: m ? 0.6  : 0.85, opacity: 0.75 },
+      { id: 'ueber-uns',   x: m ?  0.0 :  1.5,  y: 0,    scale: m ? 0.7  : 1.0,  opacity: 0.80 },
+      { id: 'team',        x: m ?  0.0 : -1.8,  y: 0,    scale: m ? 0.6  : 0.9,  opacity: 0.70 },
+      { id: 'kontakt',     x:  0.0,  y: 2.0,  scale: m ? 0.5  : 0.7,  opacity: 0.0  },
+    ];
+  }
 
   // Compute section top offsets
   function getSectionTops() {
     const docH = document.documentElement.scrollHeight - window.innerHeight;
-    return keyframes.map(kf => {
+    return getKeyframes().map(kf => {
       const el = document.getElementById(kf.id) ||
                  document.querySelector(`.${kf.id}-section`) ||
                  document.querySelector(`[data-diamond="${kf.id}"]`);
