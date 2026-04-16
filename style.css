@@ -1028,8 +1028,10 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
 .hero-video-bg video { width: 100%; height: 100%; object-fit: cover; }
 .hero-video-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.2) 50%, rgba(10,10,10,0.5) 100%); pointer-events: none; }
 .hero-video-content { position: relative; z-index: 3; width: 100%; padding: 0 var(--container-px) clamp(4rem, 8vw, 6rem); max-width: 65%; }
-.hero-video-content h1 { font-size: var(--fs-hero); font-weight: 300; line-height: 1.05; letter-spacing: -0.04em; color: white; margin-bottom: 1.5rem; }
-.hero-video-content h1 em { font-family: var(--font-display); font-style: italic; }
+.hero-video-content .hero-overline { color: rgba(255,255,255,0.6); }
+.hero-video-content .hero-heading { color: white; }
+.hero-video-content .hero-subheading { color: rgba(255,255,255,0.7); }
+.hero-video-content .hero-subheading strong { color: var(--accent-light); }
 .hero-video-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
 
 .btn-white { display: inline-flex; align-items: center; gap: 12px; background: white; color: var(--text-primary); padding: 18px 40px; font-size: var(--fs-small); font-weight: 600; text-transform: uppercase; letter-spacing: var(--ls-uppercase); border-radius: 4px; transition: all 0.3s; }
