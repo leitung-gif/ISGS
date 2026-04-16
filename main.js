@@ -241,7 +241,7 @@ gl_FragColor = vec4(clamp(col,0.0,1.0), 1.0); }`;
 
   /* CTA background now uses static image via CSS — no WebGL needed */
 
-  /* ─── EDELWEISS BACKGROUND SCATTER ─── */
+  /* ─── EDELWEISS — Fixed + Scroll Reveal ─── */
   const edelweissSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
     <g opacity="1">
       <ellipse cx="50" cy="30" rx="6" ry="14" fill="currentColor" transform="rotate(0 50 50)"/>
@@ -253,49 +253,69 @@ gl_FragColor = vec4(clamp(col,0.0,1.0), 1.0); }`;
     </g>
   </svg>`;
 
-  function scatterEdelweiss() {
+  function initEdelweiss() {
     if (document.querySelector('.edelweiss-bg')) return;
 
     const wrapper = document.createElement('div');
     wrapper.className = 'edelweiss-bg';
     wrapper.setAttribute('aria-hidden', 'true');
 
-    // Full document height
-    const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-    wrapper.style.height = docH + 'px';
+    const flowers = [];
+    const TOTAL = 50;
 
-    // More flowers for long pages, spread across full height
-    const count = Math.max(30, Math.floor(docH / 120));
-
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < TOTAL; i++) {
       const flower = document.createElement('div');
       flower.className = 'edelweiss-flower-bg';
       flower.innerHTML = edelweissSVG;
 
-      const size = 18 + Math.random() * 55;
+      const size = 16 + Math.random() * 50;
       const x = 2 + Math.random() * 96;
-      const yPx = Math.random() * docH;       // absolute pixel position
-      const rotation = Math.random() * 360;
-      const opacity = 0.025 + Math.random() * 0.045;
-      const delay = Math.random() * 10;
-      const duration = 14 + Math.random() * 14;
+      const y = 2 + Math.random() * 96;
+      const rot = Math.random() * 360;
+      const maxOpacity = 0.03 + Math.random() * 0.04;
+      const delay = Math.random() * 12;
+      const duration = 16 + Math.random() * 16;
 
       flower.style.cssText = `
         width: ${size}px; height: ${size}px;
-        left: ${x}%;
-        top: ${yPx}px;
-        transform: rotate(${rotation}deg);
-        opacity: ${opacity};
+        left: ${x}%; top: ${y}%;
+        transform: rotate(${rot}deg);
         animation-delay: ${delay}s;
         animation-duration: ${duration}s;
       `;
+      flower.dataset.maxOpacity = maxOpacity;
+      // First 8 show immediately
+      flower.dataset.revealAt = i < 8 ? 0 : (i / TOTAL);
 
       wrapper.appendChild(flower);
+      flowers.push(flower);
     }
 
     document.body.appendChild(wrapper);
+
+    // Scroll handler — reveal flowers progressively
+    let lastScroll = -1;
+    function onScrollReveal() {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = max > 0 ? window.scrollY / max : 0;
+
+      if (Math.abs(progress - lastScroll) < 0.005) return;
+      lastScroll = progress;
+
+      flowers.forEach(f => {
+        const threshold = parseFloat(f.dataset.revealAt);
+        if (progress >= threshold && !f.classList.contains('visible')) {
+          f.classList.add('visible', 'drift');
+          f.style.opacity = f.dataset.maxOpacity;
+        }
+      });
+    }
+
+    window.addEventListener('scroll', onScrollReveal, { passive: true });
+    // Trigger initial reveal
+    onScrollReveal();
   }
 
-  scatterEdelweiss();
+  initEdelweiss();
 
 });

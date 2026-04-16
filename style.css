@@ -1001,23 +1001,29 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
 .whatsapp-fab svg { width: 28px; height: 28px; fill: white; }
 
 /* ═══════════════════════════════════════════════════
-   EDELWEISS BACKGROUND SCATTER — Full page
+   EDELWEISS BACKGROUND SCATTER — Fixed + Scroll Reveal
    ═══════════════════════════════════════════════════ */
 .edelweiss-bg {
-  position: absolute; top: 0; left: 0; width: 100%;
+  position: fixed; inset: 0;
   pointer-events: none; z-index: 0;
-  /* height set by JS to match full document */
+  overflow: hidden;
 }
 .edelweiss-flower-bg {
   position: absolute;
   color: var(--gold);
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.edelweiss-flower-bg.visible { opacity: 1; }
+.edelweiss-flower-bg svg { width: 100%; height: 100%; }
+.edelweiss-flower-bg.drift {
   animation: edelweissDrift ease-in-out infinite alternate;
 }
-.edelweiss-flower-bg svg { width: 100%; height: 100%; }
 
 @keyframes edelweissDrift {
-  0% { transform: translateY(0) rotate(0deg); }
-  100% { transform: translateY(-12px) rotate(15deg); }
+  0% { transform: translateY(0) rotate(0deg) scale(1); }
+  50% { transform: translateY(-6px) rotate(8deg) scale(1.03); }
+  100% { transform: translateY(-12px) rotate(-5deg) scale(0.97); }
 }
 
 /* Ensure all content stays above flowers */
