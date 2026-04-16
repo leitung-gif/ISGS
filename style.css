@@ -424,6 +424,82 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
   z-index: 0;
 }
 
+/* Leistungen Layout — diamond LEFT, content RIGHT */
+.leistungen-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: 680px;
+  margin-left: auto;
+}
+.leistungen-header {
+  margin-bottom: 2rem;
+  text-align: right;
+}
+.leistungen-header p { color: var(--text-secondary); font-weight: 300; max-width: 400px; margin-left: auto; }
+.leistungen-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  width: 100%;
+}
+.leistung-card {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  transition: all 0.5s ease;
+}
+.leistung-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+  border-color: rgba(212,36,43,0.2);
+}
+.leistung-num {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+.leistung-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.5rem; }
+.leistung-card p { font-size: var(--fs-small); color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+
+/* Team Layout — diamond LEFT, team RIGHT */
+.team-layout {
+  max-width: 680px;
+  margin-left: auto;
+}
+.team-header { margin-bottom: 2rem; text-align: right; }
+.team-header p { color: var(--text-secondary); font-weight: 300; max-width: 400px; margin-left: auto; }
+.team-cards { display: flex; flex-direction: column; gap: 1.5rem; }
+.team-card {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.5s ease;
+}
+.team-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+}
+.team-card .team-photo {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.team-card .team-photo img { width: 100%; height: 100%; object-fit: cover; }
+.team-info h3 { font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+.team-desc { font-size: var(--fs-small); color: var(--text-secondary); font-weight: 300; line-height: 1.5; margin-top: 0.35rem; }
+
 .section-header {
   position: relative;
   margin-bottom: clamp(48px, 5vw, 80px);
