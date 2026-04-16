@@ -149,11 +149,14 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
   width: 100%;
   z-index: 1000;
   padding: 28px var(--container-px);
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   transition: background var(--duration) var(--ease), padding var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
 }
+.header .nav-links-desktop { justify-self: start; }
+.header .logo { justify-self: center; }
+.header .hamburger { justify-self: end; }
 .header.scrolled {
   background: rgba(255,255,255,0.97);
   padding: 16px var(--container-px);
