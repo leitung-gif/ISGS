@@ -88,15 +88,15 @@
         <h1 class="hero-heading">Immobilien Agentur</h1>
         <p class="hero-subheading">Ganzheitlich und <strong>Swiss Made</strong></p>
         <div style="display:flex;gap:16px;flex-wrap:wrap;">
-          <a href="#kontakt" class="btn-primary">
+          <a href="kontakt.html" class="btn-primary">
             Beratung anfragen
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <a href="#leistungen" class="btn-outline">Unsere Leistungen</a>
+          <a href="leistungen.html" class="btn-outline">Unsere Leistungen</a>
         </div>
       </div>
-      <div class="hero-image">
-        <img src="assets/images/zurich-skyline.jpg" alt="Zürich Skyline — Immobilienstandort Schweiz" loading="eager">
+      <div class="hero-shape">
+        <canvas id="heroCanvas3D"></canvas>
       </div>
     </div>
   </section>
@@ -110,42 +110,32 @@
         <h2 class="section-heading">Projekte</h2>
       </div>
 
-      <div class="projects-grid">
-        <div class="project-card featured reveal">
+      <div class="projects-trio">
+        <div class="project-card-scroll" data-scroll-stagger="0">
           <img src="assets/images/luxury-interior.jpg" alt="Luxus-Penthouse Zürich — Premium Interieur">
           <div class="project-card-overlay">
             <h3>Penthouse Zürich Seefeld</h3>
             <p>Vermarktung &bull; Premium-Segment</p>
           </div>
         </div>
-        <div class="project-card reveal">
+        <div class="project-card-scroll" data-scroll-stagger="1">
           <img src="assets/images/swiss-exterior.jpg" alt="Historische Villa am Zürichsee">
           <div class="project-card-overlay">
             <h3>Villa am Zürichsee</h3>
             <p>Bewertung &bull; Verkauf</p>
           </div>
         </div>
-        <div class="project-card reveal">
+        <div class="project-card-scroll" data-scroll-stagger="2">
           <img src="assets/images/modern-building.jpg" alt="Neubau-Projekt Winterthur">
           <div class="project-card-overlay">
             <h3>Neubau-Projekt Winterthur</h3>
             <p>Neubauprojekt &bull; Vermarktung</p>
           </div>
         </div>
-        <div class="project-card reveal">
-          <img src="assets/images/swiss-interior.jpg" alt="Chalet-Renovation Graubünden">
-          <div class="project-card-overlay">
-            <h3>Chalet Graubünden</h3>
-            <p>Renovation &bull; Beratung</p>
-          </div>
-        </div>
-        <div class="project-card reveal">
-          <img src="assets/images/chalet-interior.jpg" alt="Anlageimmobilie Bern">
-          <div class="project-card-overlay">
-            <h3>Anlageimmobilie Bern</h3>
-            <p>Investition &bull; Renditeoptimierung</p>
-          </div>
-        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:3rem;">
+        <a href="projekte.html" class="btn-outline">Alle Projekte entdecken <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
   </section>
@@ -479,5 +469,6 @@
   </a>
 
   <script src="main.js"></script>
+  <script type="module" src="hero-scene.js"></script>
 </body>
 </html>

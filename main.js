@@ -225,47 +225,19 @@ gl_FragColor = vec4(clamp(col,0.0,1.0), 1.0); }`;
     }
   }
 
-  /* ─── CTA SECTION — Mini WebGL gradient ─── */
-  document.querySelectorAll('.cta-section').forEach(section => {
-    const cvs = document.createElement('canvas');
-    cvs.className = 'cta-canvas';
-    section.insertBefore(cvs, section.firstChild);
-    const gl2 = cvs.getContext('webgl');
-    if (!gl2) return;
-
-    const vs2 = gl2.createShader(gl2.VERTEX_SHADER);
-    gl2.shaderSource(vs2, 'attribute vec2 p;void main(){gl_Position=vec4(p,0,1);}');
-    gl2.compileShader(vs2);
-    const fs2 = gl2.createShader(gl2.FRAGMENT_SHADER);
-    gl2.shaderSource(fs2, `precision mediump float;
-uniform float t;uniform vec2 r;
-void main(){
-  vec2 u=gl_FragCoord.xy/r;
-  float d=length(u-0.5);
-  float wave=sin(u.x*3.+t*0.4)*0.5+sin(u.y*4.+t*0.3)*0.5;
-  vec3 navy=vec3(0.04,0.06,0.10);
-  vec3 dark=vec3(0.08,0.10,0.15);
-  vec3 gold=vec3(0.76,0.63,0.29);
-  vec3 c=mix(navy,dark,wave*0.5+0.5);
-  c+=gold*smoothstep(0.6,0.0,d)*0.08;
-  gl_FragColor=vec4(c,1.0);
-}`);
-    gl2.compileShader(fs2);
-    const pg2 = gl2.createProgram();
-    gl2.attachShader(pg2, vs2); gl2.attachShader(pg2, fs2); gl2.linkProgram(pg2); gl2.useProgram(pg2);
-    const buf2 = gl2.createBuffer();
-    gl2.bindBuffer(gl2.ARRAY_BUFFER, buf2);
-    gl2.bufferData(gl2.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl2.STATIC_DRAW);
-    const pa2 = gl2.getAttribLocation(pg2, 'p');
-    gl2.enableVertexAttribArray(pa2);
-    gl2.vertexAttribPointer(pa2, 2, gl2.FLOAT, false, 0, 0);
-    const tU2 = gl2.getUniformLocation(pg2, 't');
-    const rU2 = gl2.getUniformLocation(pg2, 'r');
-    function resizeCTA() { cvs.width = cvs.clientWidth; cvs.height = cvs.clientHeight; gl2.viewport(0, 0, cvs.width, cvs.height); }
-    resizeCTA(); window.addEventListener('resize', resizeCTA);
-    function drawCTA(time) { gl2.uniform1f(tU2, time * 0.001); gl2.uniform2f(rU2, cvs.width, cvs.height); gl2.drawArrays(gl2.TRIANGLE_STRIP, 0, 4); requestAnimationFrame(drawCTA); }
-    requestAnimationFrame(drawCTA);
-  });
+  /* ─── PROJECT CARD SCROLL STAGGER ─── */
+  const scrollCards = document.querySelectorAll('.project-card-scroll');
+  if (scrollCards.length) {
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    scrollCards.forEach(card => cardObserver.observe(card));
+  }
 
   /* ─── EDELWEISS BACKGROUND SCATTER ─── */
   const edelweissSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
