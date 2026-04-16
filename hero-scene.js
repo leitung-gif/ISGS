@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════
-   IMMO SCHWEIZ GRUPPE — Scroll-Following Scene
-   Based on Solstice seasonal flow concept
-   Fixed canvas background, morphing shape, color shifts
+   IMMO SCHWEIZ GRUPPE — Swiss Diamond Crystal
+   Faceted gemstone = wealth + precision + Switzerland
+   Gold with Swiss red rim accents
    ═══════════════════════════════════════════════════ */
 
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
@@ -10,166 +10,160 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   const canvas = document.getElementById('heroCanvas3D');
   if (!canvas) return;
 
-  /* ─── Make canvas fixed full-page background ─── */
-  canvas.style.position = 'fixed';
-  canvas.style.top = '0';
-  canvas.style.left = '0';
-  canvas.style.width = '100vw';
-  canvas.style.height = '100vh';
-  canvas.style.zIndex = '0';
-  canvas.style.pointerEvents = 'none';
+  /* ─── Fixed viewport background ─── */
+  canvas.style.cssText = 'position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0;pointer-events:none;';
 
   /* ─── RENDERER ─── */
-  const renderer = new THREE.WebGLRenderer({
-    canvas,
-    antialias: true,
-    alpha: true,
-    powerPreference: 'high-performance'
-  });
-  const dpr = Math.min(window.devicePixelRatio, 1.5);
-  renderer.setPixelRatio(dpr);
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.2;
 
   /* ─── SCENE & CAMERA ─── */
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.1, 100);
-  camera.position.set(2.5, 0, 4.5);
+  const camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.set(3, 1.5, 5);
+  camera.lookAt(0, 0, 0);
 
-  /* ─── SECTION COLOR PALETTES (like Solstice seasons) ─── */
-  const palettes = [
-    { bg: [0.98, 0.97, 0.95], shape: [0.96, 0.94, 0.90], rim: [0.83, 0.14, 0.17], spec: [0.77, 0.64, 0.29] },  // Hero — cream/warm
-    { bg: [1.00, 1.00, 1.00], shape: [0.90, 0.86, 0.80], rim: [0.77, 0.64, 0.29], spec: [0.83, 0.14, 0.17] },  // Projekte — white/gold
-    { bg: [0.96, 0.95, 0.93], shape: [0.85, 0.78, 0.68], rim: [0.83, 0.14, 0.17], spec: [0.77, 0.64, 0.29] },  // Services — warm gray
-    { bg: [0.10, 0.10, 0.10], shape: [0.42, 0.09, 0.10], rim: [0.77, 0.64, 0.29], spec: [0.96, 0.94, 0.90] },  // Dark / Stats — deep red
-    { bg: [0.06, 0.06, 0.06], shape: [0.55, 0.42, 0.18], rim: [0.83, 0.14, 0.17], spec: [0.96, 0.94, 0.90] },  // CTA — gold on dark
-  ];
+  /* ─── LIGHTING — dramatic jewelry lighting ─── */
+  // Key light: warm gold from top-right
+  const keyLight = new THREE.DirectionalLight(0xfff5e0, 2.0);
+  keyLight.position.set(4, 6, 3);
+  scene.add(keyLight);
 
-  function lerpColor(a, b, t) {
-    return [
-      a[0] + (b[0] - a[0]) * t,
-      a[1] + (b[1] - a[1]) * t,
-      a[2] + (b[2] - a[2]) * t
-    ];
-  }
+  // Fill light: soft white from left
+  const fillLight = new THREE.DirectionalLight(0xeeeeff, 0.6);
+  fillLight.position.set(-3, 2, 4);
+  scene.add(fillLight);
 
-  /* ─── VERTEX SHADER — GPU noise ─── */
-  const vertexShader = `
-    uniform float uTime;
-    uniform float uMorph;
-    varying vec3 vNormal;
-    varying vec3 vPos;
-    varying float vDisp;
+  // Rim light: Swiss red backlight
+  const rimLight = new THREE.DirectionalLight(0xD4242B, 1.0);
+  rimLight.position.set(-2, -1, -4);
+  scene.add(rimLight);
 
-    vec3 mod289(vec3 x){ return x - floor(x*(1.0/289.0))*289.0; }
-    vec4 mod289(vec4 x){ return x - floor(x*(1.0/289.0))*289.0; }
-    vec4 permute(vec4 x){ return mod289(((x*34.0)+1.0)*x); }
-    vec4 taylorInvSqrt(vec4 r){ return 1.79284291400159 - 0.85373472095314*r; }
+  // Gold accent from below
+  const goldUp = new THREE.PointLight(0xC4A24A, 1.5, 15);
+  goldUp.position.set(0, -3, 2);
+  scene.add(goldUp);
 
-    float snoise(vec3 v){
-      const vec2 C = vec2(1.0/6.0,1.0/3.0);
-      const vec4 D = vec4(0.0,0.5,1.0,2.0);
-      vec3 i=floor(v+dot(v,C.yyy)); vec3 x0=v-i+dot(i,C.xxx);
-      vec3 g=step(x0.yzx,x0.xyz); vec3 l=1.0-g;
-      vec3 i1=min(g,l.zxy); vec3 i2=max(g,l.zxy);
-      vec3 x1=x0-i1+C.xxx; vec3 x2=x0-i2+C.yyy; vec3 x3=x0-D.yyy;
-      i=mod289(i);
-      vec4 p=permute(permute(permute(i.z+vec4(0,i1.z,i2.z,1))+i.y+vec4(0,i1.y,i2.y,1))+i.x+vec4(0,i1.x,i2.x,1));
-      float n_=0.142857142857; vec3 ns=n_*D.wyz-D.xzx;
-      vec4 j=p-49.0*floor(p*ns.z*ns.z);
-      vec4 x_=floor(j*ns.z); vec4 y_=floor(j-7.0*x_);
-      vec4 x=x_*ns.x+ns.yyyy; vec4 y=y_*ns.x+ns.yyyy;
-      vec4 h=1.0-abs(x)-abs(y);
-      vec4 b0=vec4(x.xy,y.xy); vec4 b1=vec4(x.zw,y.zw);
-      vec4 s0=floor(b0)*2.0+1.0; vec4 s1=floor(b1)*2.0+1.0;
-      vec4 sh=-step(h,vec4(0));
-      vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy; vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
-      vec3 p0=vec3(a0.xy,h.x); vec3 p1=vec3(a0.zw,h.y);
-      vec3 p2=vec3(a1.xy,h.z); vec3 p3=vec3(a1.zw,h.w);
-      vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
-      p0*=norm.x; p1*=norm.y; p2*=norm.z; p3*=norm.w;
-      vec4 m=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0);
-      m=m*m;
-      return 42.0*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
-    }
+  // Ambient: subtle warm fill
+  scene.add(new THREE.AmbientLight(0xfff8f0, 0.3));
 
-    void main(){
-      float t = uTime * 0.2;
-      float freq = 1.4 + uMorph * 0.6;
-      float amp = 0.15 + uMorph * 0.08;
-      float n1 = snoise(normal*freq + t);
-      float n2 = snoise(normal*freq*2.0 + t*1.4) * 0.4;
-      float d = (n1 + n2) * amp;
-      vec3 newPos = position + normal * d;
-      vDisp = d;
-      vNormal = normalMatrix * normal;
-      vPos = (modelViewMatrix * vec4(newPos,1.0)).xyz;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(newPos,1.0);
-    }
-  `;
-
-  /* ─── FRAGMENT SHADER ─── */
-  const fragmentShader = `
-    uniform vec3 uShapeColor;
-    uniform vec3 uRimColor;
-    uniform vec3 uSpecColor;
-    uniform float uOpacity;
-    varying vec3 vNormal;
-    varying vec3 vPos;
-    varying float vDisp;
-
-    void main(){
-      vec3 lightDir = normalize(vec3(0.5, 0.8, 1.0));
-      vec3 viewDir = normalize(-vPos);
-      vec3 halfDir = normalize(lightDir + viewDir);
-      vec3 n = normalize(vNormal);
-
-      float diff = max(dot(n, lightDir), 0.0);
-      float spec = pow(max(dot(n, halfDir), 0.0), 48.0);
-
-      // Rim lighting
-      float rim = 1.0 - max(dot(viewDir, n), 0.0);
-      rim = pow(rim, 3.0);
-
-      vec3 color = uShapeColor * (0.3 + diff * 0.7);
-      color += spec * uSpecColor * 0.35;
-      color += uRimColor * rim * 0.3;
-      color += uShapeColor * rim * 0.05;
-
-      gl_FragColor = vec4(color, uOpacity);
-    }
-  `;
-
-  /* ─── MESH ─── */
-  const geo = new THREE.IcosahedronGeometry(1.2, 14);
-  const uniforms = {
-    uTime:       { value: 0 },
-    uMorph:      { value: 0 },
-    uShapeColor: { value: new THREE.Vector3(0.96, 0.94, 0.90) },
-    uRimColor:   { value: new THREE.Vector3(0.83, 0.14, 0.17) },
-    uSpecColor:  { value: new THREE.Vector3(0.77, 0.64, 0.29) },
-    uOpacity:    { value: 0.7 }
-  };
-
-  const mat = new THREE.ShaderMaterial({
-    vertexShader,
-    fragmentShader,
-    uniforms,
+  /* ─── MATERIALS ─── */
+  // Main diamond: gold crystal
+  const diamondMat = new THREE.MeshPhysicalMaterial({
+    color: 0xD4B96A,
+    metalness: 0.85,
+    roughness: 0.12,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.05,
+    reflectivity: 1.0,
+    envMapIntensity: 1.5,
     transparent: true,
+    opacity: 0.92,
     side: THREE.DoubleSide
   });
 
-  const blob = new THREE.Mesh(geo, mat);
-  scene.add(blob);
+  // Satellite material: darker gold, more metallic
+  const satMat = new THREE.MeshPhysicalMaterial({
+    color: 0xB8973A,
+    metalness: 0.95,
+    roughness: 0.08,
+    clearcoat: 0.8,
+    clearcoatRoughness: 0.1,
+    transparent: true,
+    opacity: 0.85,
+    side: THREE.DoubleSide
+  });
+
+  // Edge wireframe: Swiss red
+  const wireMat = new THREE.MeshBasicMaterial({
+    color: 0xD4242B,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.08
+  });
+
+  /* ─── MAIN DIAMOND — faceted octahedron, stretched like a cut gem ─── */
+  const group = new THREE.Group();
+
+  // Central diamond (stretched octahedron = gemstone)
+  const diamondGeo = new THREE.OctahedronGeometry(1.3, 0);
+  diamondGeo.scale(1, 1.6, 1); // Tall diamond proportions
+  const diamond = new THREE.Mesh(diamondGeo, diamondMat);
+  group.add(diamond);
+
+  // Subtle wireframe overlay for precision feel
+  const wireframe = new THREE.Mesh(diamondGeo.clone(), wireMat);
+  wireframe.scale.set(1.01, 1.01, 1.01);
+  group.add(wireframe);
+
+  /* ─── 4 SATELLITE PRISMS — floating around the diamond ─── */
+  const satGeo = new THREE.OctahedronGeometry(0.18, 0);
+  satGeo.scale(1, 1.4, 1);
+  const satellites = [];
+  const satPositions = [
+    { angle: 0, radius: 2.2, y: 0.4, speed: 0.3, phase: 0 },
+    { angle: Math.PI * 0.5, radius: 2.0, y: -0.3, speed: 0.25, phase: 1 },
+    { angle: Math.PI, radius: 2.4, y: 0.6, speed: 0.35, phase: 2 },
+    { angle: Math.PI * 1.5, radius: 1.8, y: -0.5, speed: 0.28, phase: 3 },
+  ];
+
+  satPositions.forEach(s => {
+    const mesh = new THREE.Mesh(satGeo, satMat);
+    mesh.userData = s;
+    group.add(mesh);
+    satellites.push(mesh);
+  });
+
+  /* ─── SWISS CROSS — floating subtle accent ─── */
+  const crossGroup = new THREE.Group();
+  const crossMat = new THREE.MeshPhysicalMaterial({
+    color: 0xD4242B,
+    metalness: 0.7,
+    roughness: 0.2,
+    clearcoat: 0.5,
+    transparent: true,
+    opacity: 0.6
+  });
+  // Horizontal bar
+  const barH = new THREE.BoxGeometry(0.8, 0.2, 0.08);
+  crossGroup.add(new THREE.Mesh(barH, crossMat));
+  // Vertical bar
+  const barV = new THREE.BoxGeometry(0.2, 0.8, 0.08);
+  crossGroup.add(new THREE.Mesh(barV, crossMat));
+  crossGroup.position.set(0, 0, 0);
+  crossGroup.scale.set(0.7, 0.7, 0.7);
+  group.add(crossGroup);
+
+  scene.add(group);
 
   /* ─── SCROLL TRACKING ─── */
-  let scrollTarget = 0;
-  let scrollSmooth = 0;
-
+  let scrollTarget = 0, scrollSmooth = 0;
   function onScroll() {
     const max = document.documentElement.scrollHeight - window.innerHeight;
     scrollTarget = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
   }
   window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ─── COLOR STAGES ─── */
+  const stages = [
+    { diamond: 0xD4B96A, rim: 0xD4242B, opacity: 0.88 },  // Hero: gold
+    { diamond: 0xC4A24A, rim: 0xB01E24, opacity: 0.75 },  // Mid: deeper gold
+    { diamond: 0xA88830, rim: 0xD4242B, opacity: 0.55 },  // Services: warm
+    { diamond: 0x8B6914, rim: 0xE84850, opacity: 0.4 },   // Dark: antique gold
+    { diamond: 0xC4A24A, rim: 0xD4242B, opacity: 0.3 },   // CTA: subtle
+  ];
+
+  function lerpHex(a, b, t) {
+    const ar = (a >> 16) & 0xff, ag = (a >> 8) & 0xff, ab = a & 0xff;
+    const br = (b >> 16) & 0xff, bg = (b >> 8) & 0xff, bb = b & 0xff;
+    const r = Math.round(ar + (br - ar) * t);
+    const g = Math.round(ag + (bg - ag) * t);
+    const bv = Math.round(ab + (bb - ab) * t);
+    return (r << 16) | (g << 8) | bv;
+  }
 
   /* ─── ANIMATION ─── */
   const clock = new THREE.Clock();
@@ -182,42 +176,49 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
     const t = clock.getElapsedTime();
     scrollSmooth += (scrollTarget - scrollSmooth) * 0.03;
 
-    uniforms.uTime.value = t;
-    uniforms.uMorph.value = scrollSmooth;
+    // Color stage interpolation
+    const sIdx = scrollSmooth * (stages.length - 1);
+    const sFloor = Math.floor(sIdx);
+    const sFrac = sIdx - sFloor;
+    const sA = stages[Math.min(sFloor, stages.length - 1)];
+    const sB = stages[Math.min(sFloor + 1, stages.length - 1)];
 
-    // Determine current palette based on scroll
-    const pIdx = scrollSmooth * (palettes.length - 1);
-    const pFloor = Math.floor(pIdx);
-    const pFrac = pIdx - pFloor;
-    const pA = palettes[Math.min(pFloor, palettes.length - 1)];
-    const pB = palettes[Math.min(pFloor + 1, palettes.length - 1)];
+    diamondMat.color.setHex(lerpHex(sA.diamond, sB.diamond, sFrac));
+    rimLight.color.setHex(lerpHex(sA.rim, sB.rim, sFrac));
+    const targetOpacity = sA.opacity + (sB.opacity - sA.opacity) * sFrac;
+    diamondMat.opacity += (targetOpacity - diamondMat.opacity) * 0.05;
+    satMat.opacity = diamondMat.opacity * 0.8;
+    crossMat.opacity = diamondMat.opacity * 0.6;
+    wireMat.opacity = diamondMat.opacity * 0.1;
 
-    const shapeCol = lerpColor(pA.shape, pB.shape, pFrac);
-    const rimCol = lerpColor(pA.rim, pB.rim, pFrac);
-    const specCol = lerpColor(pA.spec, pB.spec, pFrac);
-
-    uniforms.uShapeColor.value.set(shapeCol[0], shapeCol[1], shapeCol[2]);
-    uniforms.uRimColor.value.set(rimCol[0], rimCol[1], rimCol[2]);
-    uniforms.uSpecColor.value.set(specCol[0], specCol[1], specCol[2]);
-
-    // Opacity: visible in hero, subtle in middle, fades on dark sections
-    const opacityMap = scrollSmooth < 0.15 ? 0.7 :
-                       scrollSmooth < 0.5  ? 0.5 :
-                       scrollSmooth < 0.8  ? 0.35 : 0.25;
-    uniforms.uOpacity.value += (opacityMap - uniforms.uOpacity.value) * 0.05;
-
-    // Gentle rotation + scroll influence
-    blob.rotation.x = t * 0.05 + scrollSmooth * Math.PI * 0.3;
-    blob.rotation.y = t * 0.07 + scrollSmooth * Math.PI * 0.5;
+    // Main rotation: majestic, slow
+    group.rotation.y = t * 0.15 + scrollSmooth * Math.PI;
+    group.rotation.x = Math.sin(t * 0.08) * 0.1 + scrollSmooth * 0.3;
 
     // Float hover
-    blob.position.y = Math.sin(t * 0.4) * 0.1;
-    blob.position.x = 1.8 - scrollSmooth * 1.2; // starts right, drifts center
-    blob.position.z = -scrollSmooth * 0.5;
+    group.position.y = Math.sin(t * 0.3) * 0.12;
+    group.position.x = 1.5 - scrollSmooth * 1.0; // starts right, drifts center
 
-    // Scale changes through scroll
-    const scale = 1.0 + scrollSmooth * 0.3;
-    blob.scale.set(scale, scale, scale);
+    // Scale with scroll
+    const s = 1.0 + scrollSmooth * 0.2;
+    group.scale.set(s, s, s);
+
+    // Animate satellites orbiting
+    satellites.forEach(sat => {
+      const d = sat.userData;
+      const angle = d.angle + t * d.speed;
+      const r = d.radius + Math.sin(t * 0.5 + d.phase) * 0.15;
+      sat.position.x = Math.cos(angle) * r;
+      sat.position.z = Math.sin(angle) * r;
+      sat.position.y = d.y + Math.sin(t * 0.6 + d.phase * 2) * 0.2;
+      sat.rotation.y = t * 0.8 + d.phase;
+      sat.rotation.x = t * 0.4;
+    });
+
+    // Swiss cross: counter-rotate, stays frontal
+    crossGroup.rotation.y = -group.rotation.y * 0.5;
+    crossGroup.rotation.x = -group.rotation.x * 0.3;
+    crossGroup.position.z = Math.sin(t * 0.2) * 0.05;
 
     renderer.render(scene, camera);
   }
