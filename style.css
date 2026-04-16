@@ -1002,9 +1002,9 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
    EDELWEISS BACKGROUND SCATTER — Full page
    ═══════════════════════════════════════════════════ */
 .edelweiss-bg {
-  position: fixed; inset: 0; overflow: hidden;
+  position: absolute; top: 0; left: 0; width: 100%;
   pointer-events: none; z-index: 0;
-  width: 100vw; height: 100vh;
+  /* height set by JS to match full document */
 }
 .edelweiss-flower-bg {
   position: absolute;

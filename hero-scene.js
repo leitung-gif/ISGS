@@ -75,22 +75,22 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
 
   /* ─── DIAMOND MATERIAL — transparent glass with red fire ─── */
   const diamondMat = new THREE.MeshPhysicalMaterial({
-    color: 0xffffff,
-    metalness: 0.0,
-    roughness: 0.0,
-    transmission: 0.6,        // less see-through, more solid
+    color: 0xf5e6c8,
+    metalness: 0.15,
+    roughness: 0.02,
+    transmission: 0.25,        // mostly solid, subtle transparency
     thickness: 2.0,           // refraction depth
     ior: 2.42,                // real diamond IOR
     clearcoat: 1.0,
     clearcoatRoughness: 0.0,
     envMap: envMap,
-    envMapIntensity: 5.0,
+    envMapIntensity: 4.0,
     specularIntensity: 1.0,
     specularColor: new THREE.Color(0xD4242B), // RED specular fire
     attenuationColor: new THREE.Color(0xffcccc), // subtle warm internal tint
     attenuationDistance: 3.0,
     transparent: true,
-    opacity: 0.95,
+    opacity: 0.92,
     side: THREE.DoubleSide,
   });
 

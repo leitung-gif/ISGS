@@ -329,32 +329,36 @@ void main() {
   </svg>`;
 
   function scatterEdelweiss() {
-    // Single full-page edelweiss layer on body
     if (document.querySelector('.edelweiss-bg')) return;
 
     const wrapper = document.createElement('div');
     wrapper.className = 'edelweiss-bg';
     wrapper.setAttribute('aria-hidden', 'true');
 
-    // 25-35 flowers spread across the full viewport
-    const count = 25 + Math.floor(Math.random() * 10);
+    // Full document height
+    const docH = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+    wrapper.style.height = docH + 'px';
+
+    // More flowers for long pages, spread across full height
+    const count = Math.max(30, Math.floor(docH / 120));
 
     for (let i = 0; i < count; i++) {
       const flower = document.createElement('div');
       flower.className = 'edelweiss-flower-bg';
       flower.innerHTML = edelweissSVG;
 
-      const size = 18 + Math.random() * 55;   // 18–73px
-      const x = 2 + Math.random() * 96;        // spread across full width
-      const y = 2 + Math.random() * 96;         // spread across full height
+      const size = 18 + Math.random() * 55;
+      const x = 2 + Math.random() * 96;
+      const yPx = Math.random() * docH;       // absolute pixel position
       const rotation = Math.random() * 360;
-      const opacity = 0.025 + Math.random() * 0.045; // Very subtle
+      const opacity = 0.025 + Math.random() * 0.045;
       const delay = Math.random() * 10;
       const duration = 14 + Math.random() * 14;
 
       flower.style.cssText = `
         width: ${size}px; height: ${size}px;
-        left: ${x}%; top: ${y}%;
+        left: ${x}%;
+        top: ${yPx}px;
         transform: rotate(${rotation}deg);
         opacity: ${opacity};
         animation-delay: ${delay}s;
