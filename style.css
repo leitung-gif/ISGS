@@ -413,19 +413,9 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
   text-align: right;
 }
 
-/* Team Edelweiss Section — fabric backdrop */
+/* Team Edelweiss Section */
 .team-edelweiss-section {
   position: relative;
-}
-.team-edelweiss-section::before {
-  content: '';
-  position: absolute;
-  inset: -2rem;
-  background: url('assets/images/edelweiss-fabric.avif') center/cover no-repeat;
-  opacity: 0.12;
-  pointer-events: none;
-  z-index: 0;
-  border-radius: 30px;
 }
 
 /* Leistungen Layout — diamond LEFT, content RIGHT */
@@ -484,12 +474,23 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
   gap: 1.5rem;
   align-items: center;
   background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(10px);
   border: 1px solid var(--border-light);
   border-radius: 16px;
   padding: 1.5rem;
   transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
 }
+.team-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('assets/images/edelweiss-fabric.avif') center/cover no-repeat;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+.team-card > * { position: relative; z-index: 1; }
 .team-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 8px 30px rgba(212,36,43,0.15), 0 4px 15px rgba(0,0,0,0.05);
