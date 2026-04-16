@@ -105,7 +105,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
     { id: 'projekte',    x: -1.5,  y: 0,   scale: 1.17, opacity: 0.92 },
     { id: 'matterhorn',  x:  1.8,  y: -0.3,scale: 0.58, opacity: 0.85 },
     { id: 'leistungen',  x: -1.8,  y: 0,   scale: 0.85, opacity: 0.90 },
-    { id: 'ueber-uns',   x:  0.0,  y: 0,   scale: 1.0,  opacity: 0.92 },
+    { id: 'ueber-uns',   x:  1.5,  y: 0,   scale: 1.0,  opacity: 0.92 },
     { id: 'team',        x: -1.8,  y: 0,   scale: 0.9,  opacity: 0.88 },
     { id: 'kontakt',     x:  0.0,  y: 2.0, scale: 0.7,  opacity: 0.0  },
   ];

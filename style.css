@@ -378,13 +378,17 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
 .section-white { background: transparent; }
 .section-gray { background: transparent; }
 
-/* Featured Project — single project highlight */
-.project-featured {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 4rem;
-  align-items: center;
+/* Featured Project — right-aligned layout */
+.projekte-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: 580px;
+  margin-left: auto;
 }
+.projekte-header { margin-bottom: 2rem; text-align: right; }
+.projekte-header p { color: var(--text-secondary); font-weight: 300; max-width: 420px; margin-left: auto; }
+.project-showcase { width: 100%; }
 .project-featured-image {
   border-radius: 20px;
   overflow: hidden;
@@ -392,23 +396,21 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
 }
 .project-featured-image img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   display: block;
   transition: transform 0.8s ease;
 }
-.project-featured:hover .project-featured-image img {
+.project-showcase:hover .project-featured-image img {
   transform: scale(1.03);
 }
-.project-featured-text .overline { margin-bottom: 0.75rem; }
-.project-featured-text .section-heading { margin-bottom: 1.5rem; }
-.project-featured-text p { color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
 .project-meta {
   font-size: var(--fs-small);
-  color: var(--gold);
+  color: var(--accent);
   font-weight: 500;
   letter-spacing: 0.03em;
   margin-top: 1rem;
+  text-align: right;
 }
 
 /* Team Edelweiss Section — fabric backdrop */
@@ -479,13 +481,26 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
   display: flex;
   gap: 1.5rem;
   align-items: center;
-  background: rgba(255,255,255,0.7);
+  background: rgba(248,245,240,0.85);
   backdrop-filter: blur(8px);
   border: 1px solid var(--border-light);
   border-radius: 16px;
   padding: 1.5rem;
   transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
 }
+.team-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none'%3E%3Cg opacity='0.06'%3E%3Cellipse cx='50' cy='30' rx='6' ry='14' fill='%23C4A24A' transform='rotate(0 50 50)'/%3E%3Cellipse cx='50' cy='30' rx='6' ry='14' fill='%23C4A24A' transform='rotate(72 50 50)'/%3E%3Cellipse cx='50' cy='30' rx='6' ry='14' fill='%23C4A24A' transform='rotate(144 50 50)'/%3E%3Cellipse cx='50' cy='30' rx='6' ry='14' fill='%23C4A24A' transform='rotate(216 50 50)'/%3E%3Cellipse cx='50' cy='30' rx='6' ry='14' fill='%23C4A24A' transform='rotate(288 50 50)'/%3E%3Ccircle cx='50' cy='50' r='6' fill='%23C4A24A' opacity='0.5'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 60px 60px;
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+.team-card > * { position: relative; z-index: 1; }
 .team-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 40px rgba(0,0,0,0.06);
@@ -1029,8 +1044,8 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
 .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
 .btn-outline-light { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.08); color: white; padding: 18px 40px; font-size: var(--fs-small); font-weight: 600; text-transform: uppercase; letter-spacing: var(--ls-uppercase); border: 2px solid rgba(255,255,255,0.2); border-radius: 4px; backdrop-filter: blur(16px); transition: all 0.3s; }
 .btn-outline-light:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.4); }
-.btn-gold { display: inline-flex; align-items: center; gap: 12px; background: var(--gold); color: var(--bg-dark); padding: 18px 40px; font-size: var(--fs-small); font-weight: 600; text-transform: uppercase; letter-spacing: var(--ls-uppercase); border-radius: 4px; transition: all 0.3s; }
-.btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+.btn-gold { display: inline-flex; align-items: center; gap: 12px; background: var(--accent); color: white; padding: 18px 40px; font-size: var(--fs-small); font-weight: 600; text-transform: uppercase; letter-spacing: var(--ls-uppercase); border-radius: 4px; transition: all 0.3s; }
+.btn-gold:hover { background: var(--accent-hover); transform: translateY(-2px); }
 
 /* Video ribbon (projekte page) */
 .video-ribbon { position: relative; height: 60vh; min-height: 400px; overflow: hidden; }
@@ -1093,7 +1108,7 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
 }
 .cta-section .container { position: relative; z-index: 2; }
 .cta-section h2 { font-size: var(--fs-hero); font-weight: 300; letter-spacing: -0.04em; max-width: 18ch; margin: 0 auto 1.5rem; color: white; line-height: 1.05; }
-.cta-section h2 em { color: var(--gold-light); }
+.cta-section h2 em { color: var(--accent-light); }
 .cta-section p { color: var(--text-on-dark-muted); font-weight: 300; font-size: clamp(1rem, 1.2vw, 1.1rem); max-width: 50ch; margin: 0 auto 2.5rem; line-height: 1.7; }
 .cta-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
 
@@ -1103,7 +1118,7 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
 .section-dark { background: var(--bg-dark); color: white; }
 .section-dark h2, .section-dark h3 { color: white; }
 .section-dark p { color: var(--text-on-dark-muted); }
-.section-dark .overline { color: var(--gold-light); }
+.section-dark .overline { color: var(--accent-light); }
 .section-dark .stat-number { color: white; }
 .section-dark .stat-label { color: var(--text-on-dark-muted); }
 
@@ -1113,7 +1128,7 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
   border-radius: 20px; padding: 2.5rem 2rem; transition: all 0.5s;
 }
 .service-card-dark:hover { background: rgba(255,255,255,0.08); border-color: rgba(196,162,74,0.25); transform: translateY(-4px); }
-.service-card-dark .num { font-family: var(--font-display); font-size: 0.75rem; color: var(--gold); opacity: 0.6; display: block; margin-bottom: 0.75rem; }
+.service-card-dark .num { font-family: var(--font-display); font-size: 0.75rem; color: var(--accent); opacity: 0.6; display: block; margin-bottom: 0.75rem; }
 .service-card-dark h3 { font-size: 1.15rem; font-weight: 500; color: white; margin-bottom: 0.75rem; }
 .service-card-dark p { font-size: var(--fs-small); color: var(--text-on-dark-muted); font-weight: 300; line-height: 1.6; }
 
