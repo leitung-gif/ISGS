@@ -61,7 +61,7 @@ body {
   font-size: var(--fs-body);
   line-height: var(--lh-body);
   color: var(--text-primary);
-  background: var(--bg-white);
+  background: var(--bg-light);
   overflow-x: hidden;
 }
 img, video { max-width: 100%; height: auto; display: block; }
@@ -374,9 +374,9 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
    PROJECTS / PORTFOLIO SECTION
    ═══════════════════════════════════════════════════ */
 .section { padding: var(--section-py) 0; position: relative; }
-.section-light { background: var(--bg-light); }
-.section-white { background: var(--bg-white); }
-.section-gray { background: var(--bg-gray); }
+.section-light { background: transparent; }
+.section-white { background: transparent; }
+.section-gray { background: transparent; }
 
 .section-header {
   position: relative;
@@ -968,11 +968,12 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
 .whatsapp-fab svg { width: 28px; height: 28px; fill: white; }
 
 /* ═══════════════════════════════════════════════════
-   EDELWEISS BACKGROUND SCATTER
+   EDELWEISS BACKGROUND SCATTER — Full page
    ═══════════════════════════════════════════════════ */
 .edelweiss-bg {
-  position: absolute; inset: 0; overflow: hidden;
+  position: fixed; inset: 0; overflow: hidden;
   pointer-events: none; z-index: 0;
+  width: 100vw; height: 100vh;
 }
 .edelweiss-flower-bg {
   position: absolute;
@@ -986,10 +987,10 @@ em, .em { font-family: var(--font-display); font-style: italic; font-weight: 400
   100% { transform: translateY(-12px) rotate(15deg); }
 }
 
-/* Ensure section content stays above flowers */
-.section-light > .container,
-.section-white > .container,
-.page-hero > .container { position: relative; z-index: 1; }
+/* Ensure all content stays above flowers */
+.section > .container,
+.page-hero > .container,
+.hero > .container { position: relative; z-index: 1; }
 
 /* ═══════════════════════════════════════════════════
    RESPONSIVE

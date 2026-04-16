@@ -329,48 +329,42 @@ void main() {
   </svg>`;
 
   function scatterEdelweiss() {
-    const targets = document.querySelectorAll('.section-light, .section-white, .page-hero');
-    targets.forEach(section => {
-      // Skip sections that already have edelweiss or are too small
-      if (section.querySelector('.edelweiss-bg')) return;
-      const rect = section.getBoundingClientRect();
-      if (rect.height < 200) return;
+    // Single full-page edelweiss layer on body
+    if (document.querySelector('.edelweiss-bg')) return;
 
-      const wrapper = document.createElement('div');
-      wrapper.className = 'edelweiss-bg';
-      wrapper.setAttribute('aria-hidden', 'true');
+    const wrapper = document.createElement('div');
+    wrapper.className = 'edelweiss-bg';
+    wrapper.setAttribute('aria-hidden', 'true');
 
-      // Number of flowers based on section height
-      const count = Math.max(3, Math.floor(rect.height / 180));
+    // 25-35 flowers spread across the full viewport
+    const count = 25 + Math.floor(Math.random() * 10);
 
-      for (let i = 0; i < count; i++) {
-        const flower = document.createElement('div');
-        flower.className = 'edelweiss-flower-bg';
-        flower.innerHTML = edelweissSVG;
+    for (let i = 0; i < count; i++) {
+      const flower = document.createElement('div');
+      flower.className = 'edelweiss-flower-bg';
+      flower.innerHTML = edelweissSVG;
 
-        const size = 20 + Math.random() * 50; // 20–70px
-        const x = 3 + Math.random() * 94;      // 3%–97% horizontal
-        const y = 5 + Math.random() * 85;       // 5%–90% vertical
-        const rotation = Math.random() * 360;
-        const opacity = 0.03 + Math.random() * 0.05; // Very subtle
-        const delay = Math.random() * 8;
-        const duration = 12 + Math.random() * 12;
+      const size = 18 + Math.random() * 55;   // 18–73px
+      const x = 2 + Math.random() * 96;        // spread across full width
+      const y = 2 + Math.random() * 96;         // spread across full height
+      const rotation = Math.random() * 360;
+      const opacity = 0.025 + Math.random() * 0.045; // Very subtle
+      const delay = Math.random() * 10;
+      const duration = 14 + Math.random() * 14;
 
-        flower.style.cssText = `
-          width: ${size}px; height: ${size}px;
-          left: ${x}%; top: ${y}%;
-          transform: rotate(${rotation}deg);
-          opacity: ${opacity};
-          animation-delay: ${delay}s;
-          animation-duration: ${duration}s;
-        `;
+      flower.style.cssText = `
+        width: ${size}px; height: ${size}px;
+        left: ${x}%; top: ${y}%;
+        transform: rotate(${rotation}deg);
+        opacity: ${opacity};
+        animation-delay: ${delay}s;
+        animation-duration: ${duration}s;
+      `;
 
-        wrapper.appendChild(flower);
-      }
+      wrapper.appendChild(flower);
+    }
 
-      section.style.position = 'relative';
-      section.appendChild(wrapper);
-    });
+    document.body.appendChild(wrapper);
   }
 
   scatterEdelweiss();
