@@ -1,13 +1,134 @@
 /* ═══════════════════════════════════════════════════
-   IMMO SCHWEIZ GRUPPE — Hero Organic Shape
-   Three.js WebGL — Scroll-driven floating blob
+   IMMO SCHWEIZ GRUPPE — GPU Organic Shape
+   All displacement on GPU via custom shaders
+   Swiss Red × Gold palette — scroll-reactive
    ═══════════════════════════════════════════════════ */
 
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
 
-(function() {
+(function () {
   const canvas = document.getElementById('heroCanvas3D');
   if (!canvas) return;
+
+  /* ─── VERTEX SHADER — GPU noise displacement ─── */
+  const vertexShader = `
+    uniform float uTime;
+    uniform float uScroll;
+    varying vec3 vNormal;
+    varying vec3 vPosition;
+    varying float vDisplacement;
+
+    // Simplex-style noise on GPU
+    vec3 mod289(vec3 x){ return x - floor(x * (1.0/289.0)) * 289.0; }
+    vec4 mod289(vec4 x){ return x - floor(x * (1.0/289.0)) * 289.0; }
+    vec4 permute(vec4 x){ return mod289(((x*34.0)+1.0)*x); }
+    vec4 taylorInvSqrt(vec4 r){ return 1.79284291400159 - 0.85373472095314 * r; }
+
+    float snoise(vec3 v){
+      const vec2 C = vec2(1.0/6.0, 1.0/3.0);
+      const vec4 D = vec4(0.0, 0.5, 1.0, 2.0);
+      vec3 i = floor(v + dot(v, C.yyy));
+      vec3 x0 = v - i + dot(i, C.xxx);
+      vec3 g = step(x0.yzx, x0.xyz);
+      vec3 l = 1.0 - g;
+      vec3 i1 = min(g.xyz, l.zxy);
+      vec3 i2 = max(g.xyz, l.zxy);
+      vec3 x1 = x0 - i1 + C.xxx;
+      vec3 x2 = x0 - i2 + C.yyy;
+      vec3 x3 = x0 - D.yyy;
+      i = mod289(i);
+      vec4 p = permute(permute(permute(
+        i.z + vec4(0.0, i1.z, i2.z, 1.0))
+        + i.y + vec4(0.0, i1.y, i2.y, 1.0))
+        + i.x + vec4(0.0, i1.x, i2.x, 1.0));
+      float n_ = 0.142857142857;
+      vec3 ns = n_ * D.wyz - D.xzx;
+      vec4 j = p - 49.0 * floor(p * ns.z * ns.z);
+      vec4 x_ = floor(j * ns.z);
+      vec4 y_ = floor(j - 7.0 * x_);
+      vec4 x = x_ * ns.x + ns.yyyy;
+      vec4 y = y_ * ns.x + ns.yyyy;
+      vec4 h = 1.0 - abs(x) - abs(y);
+      vec4 b0 = vec4(x.xy, y.xy);
+      vec4 b1 = vec4(x.zw, y.zw);
+      vec4 s0 = floor(b0)*2.0 + 1.0;
+      vec4 s1 = floor(b1)*2.0 + 1.0;
+      vec4 sh = -step(h, vec4(0.0));
+      vec4 a0 = b0.xzyw + s0.xzyw*sh.xxyy;
+      vec4 a1 = b1.xzyw + s1.xzyw*sh.zzww;
+      vec3 p0 = vec3(a0.xy, h.x);
+      vec3 p1 = vec3(a0.zw, h.y);
+      vec3 p2 = vec3(a1.xy, h.z);
+      vec3 p3 = vec3(a1.zw, h.w);
+      vec4 norm = taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
+      p0 *= norm.x; p1 *= norm.y; p2 *= norm.z; p3 *= norm.w;
+      vec4 m = max(0.6 - vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)), 0.0);
+      m = m * m;
+      return 42.0 * dot(m*m, vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
+    }
+
+    void main() {
+      float freq = 1.2 + uScroll * 0.8;
+      float amp = 0.18 + uScroll * 0.06;
+      float t = uTime * 0.25;
+
+      float n1 = snoise(normal * freq + t);
+      float n2 = snoise(normal * freq * 2.0 + t * 1.3) * 0.5;
+      float displacement = (n1 + n2) * amp;
+
+      vec3 newPosition = position + normal * displacement;
+      vDisplacement = displacement;
+      vNormal = normalMatrix * normal;
+      vPosition = (modelViewMatrix * vec4(newPosition, 1.0)).xyz;
+      gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+    }
+  `;
+
+  /* ─── FRAGMENT SHADER — Swiss luxury surface ─── */
+  const fragmentShader = `
+    uniform float uTime;
+    uniform float uScroll;
+    varying vec3 vNormal;
+    varying vec3 vPosition;
+    varying float vDisplacement;
+
+    void main() {
+      vec3 lightDir = normalize(vec3(0.5, 0.8, 1.0));
+      vec3 viewDir = normalize(-vPosition);
+      vec3 halfDir = normalize(lightDir + viewDir);
+      vec3 norm = normalize(vNormal);
+
+      float diff = max(dot(norm, lightDir), 0.0);
+      float spec = pow(max(dot(norm, halfDir), 0.0), 64.0);
+
+      // Brand colors
+      vec3 warmCream = vec3(0.96, 0.94, 0.90);
+      vec3 gold = vec3(0.77, 0.64, 0.29);
+      vec3 swissRed = vec3(0.83, 0.14, 0.17);
+
+      // Base color shifts with displacement
+      vec3 baseColor = mix(warmCream, gold, smoothstep(-0.1, 0.15, vDisplacement));
+      baseColor = mix(baseColor, swissRed, smoothstep(0.1, 0.25, vDisplacement) * 0.15);
+
+      // Scroll shifts toward gold
+      baseColor = mix(baseColor, gold, uScroll * 0.2);
+
+      // Rim light (Swiss red edge glow)
+      float rim = 1.0 - max(dot(viewDir, norm), 0.0);
+      rim = pow(rim, 3.0);
+      vec3 rimColor = swissRed * rim * 0.35;
+
+      // Final composition
+      vec3 color = baseColor * (0.35 + diff * 0.65);
+      color += spec * gold * 0.4;
+      color += rimColor;
+
+      // Subtle fresnel glow
+      color += warmCream * rim * 0.08;
+
+      gl_FragColor = vec4(color, 0.88);
+    }
+  `;
 
   /* ─── RENDERER ─── */
   const renderer = new THREE.WebGLRenderer({
@@ -18,148 +139,99 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-  renderer.setClearColor(0x000000, 0);
 
   /* ─── SCENE & CAMERA ─── */
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
-  camera.position.set(0, 0, 5);
+  const camera = new THREE.PerspectiveCamera(40, canvas.clientWidth / canvas.clientHeight, 0.1, 100);
+  camera.position.set(0, 0, 4.5);
 
-  /* ─── LIGHTING ─── */
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-  scene.add(ambientLight);
+  /* ─── SHAPE (GPU-displaced, 12 subdivisions = ~2.5K verts — fast) ─── */
+  const geo = new THREE.IcosahedronGeometry(1.3, 12);
+  const uniforms = {
+    uTime: { value: 0 },
+    uScroll: { value: 0 }
+  };
 
-  const keyLight = new THREE.DirectionalLight(0xfff5e6, 1.2);
-  keyLight.position.set(3, 4, 5);
-  scene.add(keyLight);
-
-  const rimLight = new THREE.DirectionalLight(0xD4242B, 0.6);
-  rimLight.position.set(-3, 2, -2);
-  scene.add(rimLight);
-
-  const goldLight = new THREE.PointLight(0xC4A24A, 0.8, 15);
-  goldLight.position.set(2, -1, 3);
-  scene.add(goldLight);
-
-  /* ─── ORGANIC SHAPE ─── */
-  const geometry = new THREE.IcosahedronGeometry(1.4, 64);
-  const basePositions = geometry.attributes.position.array.slice();
-
-  const material = new THREE.MeshPhysicalMaterial({
-    color: 0xf5f0eb,
-    metalness: 0.15,
-    roughness: 0.35,
-    clearcoat: 0.5,
-    clearcoatRoughness: 0.2,
-    envMapIntensity: 0.8,
+  const mat = new THREE.ShaderMaterial({
+    vertexShader,
+    fragmentShader,
+    uniforms,
     transparent: true,
-    opacity: 0.92
+    side: THREE.DoubleSide
   });
 
-  const mesh = new THREE.Mesh(geometry, material);
-  scene.add(mesh);
+  const blob = new THREE.Mesh(geo, mat);
+  scene.add(blob);
 
-  /* ─── SIMPLEX NOISE (inline for zero deps) ─── */
-  function noise3D(x, y, z) {
-    const p = x * 1.17 + y * 2.31 + z * 0.79;
-    const s1 = Math.sin(p * 3.14) * 0.5;
-    const s2 = Math.sin(x * 2.7 + z * 1.3) * 0.3;
-    const s3 = Math.cos(y * 3.1 + x * 0.9) * 0.2;
-    return s1 + s2 + s3;
+  /* ─── SCROLL ─── */
+  let scrollTarget = 0;
+  let scrollSmooth = 0;
+  function onScroll() {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    scrollTarget = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
   }
+  window.addEventListener('scroll', onScroll, { passive: true });
 
-  /* ─── SCROLL TRACKING ─── */
-  let scrollProgress = 0;
-  let targetScroll = 0;
-
-  function updateScroll() {
-    const docH = document.documentElement.scrollHeight - window.innerHeight;
-    targetScroll = docH > 0 ? window.scrollY / docH : 0;
-  }
-  window.addEventListener('scroll', updateScroll, { passive: true });
-  updateScroll();
-
-  /* ─── ANIMATION LOOP ─── */
-  let raf;
+  /* ─── ANIMATE ─── */
+  let raf = null;
+  let running = false;
   const clock = new THREE.Clock();
 
   function animate() {
+    if (!running) return;
     raf = requestAnimationFrame(animate);
+
     const t = clock.getElapsedTime();
+    scrollSmooth += (scrollTarget - scrollSmooth) * 0.04;
 
-    // Smooth scroll lerp
-    scrollProgress += (targetScroll - scrollProgress) * 0.05;
+    uniforms.uTime.value = t;
+    uniforms.uScroll.value = scrollSmooth;
 
-    // Morph geometry
-    const positions = geometry.attributes.position.array;
-    for (let i = 0; i < positions.length; i += 3) {
-      const bx = basePositions[i];
-      const by = basePositions[i + 1];
-      const bz = basePositions[i + 2];
-      const len = Math.sqrt(bx * bx + by * by + bz * bz);
-      const nx = bx / len, ny = by / len, nz = bz / len;
+    // Gentle idle rotation + scroll influence
+    blob.rotation.x = t * 0.06 + scrollSmooth * 0.4;
+    blob.rotation.y = t * 0.09 + scrollSmooth * 0.6;
 
-      const freq = 1.5 + scrollProgress * 1.2;
-      const amp = 0.12 + scrollProgress * 0.08;
-      const displacement = noise3D(
-        nx * freq + t * 0.3,
-        ny * freq + t * 0.2,
-        nz * freq + t * 0.15
-      ) * amp;
+    // Float hover
+    blob.position.y = Math.sin(t * 0.5) * 0.12;
+    blob.position.x = Math.sin(t * 0.35) * 0.06;
 
-      const newLen = len + displacement;
-      positions[i] = nx * newLen;
-      positions[i + 1] = ny * newLen;
-      positions[i + 2] = nz * newLen;
-    }
-    geometry.attributes.position.needsUpdate = true;
-    geometry.computeVertexNormals();
-
-    // Gentle rotation
-    mesh.rotation.x = t * 0.08 + scrollProgress * 0.5;
-    mesh.rotation.y = t * 0.12 + scrollProgress * 0.8;
-
-    // Floating hover
-    mesh.position.y = Math.sin(t * 0.6) * 0.15;
-    mesh.position.x = Math.sin(t * 0.4) * 0.08;
-
-    // Color shift on scroll — from warm cream to gold to red-tinted
-    const r = 0.96 - scrollProgress * 0.12;
-    const g = 0.94 - scrollProgress * 0.20;
-    const b = 0.92 - scrollProgress * 0.30;
-    material.color.setRGB(r, g, b);
-
-    // Scale on scroll
-    const s = 1 + scrollProgress * 0.15;
-    mesh.scale.set(s, s, s);
+    // Scale up slightly on scroll
+    const s = 1.0 + scrollSmooth * 0.12;
+    blob.scale.set(s, s, s);
 
     renderer.render(scene, camera);
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+    clock.start();
+    animate();
+  }
+
+  function stop() {
+    running = false;
+    if (raf) { cancelAnimationFrame(raf); raf = null; }
   }
 
   /* ─── RESIZE ─── */
   function onResize() {
     const w = canvas.clientWidth;
     const h = canvas.clientHeight;
-    if (canvas.width !== w || canvas.height !== h) {
-      renderer.setSize(w, h);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-    }
+    if (w === 0 || h === 0) return;
+    renderer.setSize(w, h);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
   }
   window.addEventListener('resize', onResize, { passive: true });
 
-  /* ─── VISIBILITY: pause when off-screen ─── */
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        if (!raf) animate();
-      } else {
-        cancelAnimationFrame(raf);
-        raf = null;
-      }
-    });
-  }, { threshold: 0 });
-  observer.observe(canvas);
+  /* ─── VISIBILITY (pause off-screen → save GPU) ─── */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => e.isIntersecting ? start() : stop());
+  }, { threshold: 0.05 });
+  io.observe(canvas);
 
-  animate();
+  // Initial kick
+  onResize();
+  start();
 })();
