@@ -86,7 +86,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   /* ─── SHARP WHITE EDGES ─── */
   const edgesGeo = new THREE.EdgesGeometry(diamondGeo, 10);
   const edgeLines = new THREE.LineSegments(edgesGeo, new THREE.LineBasicMaterial({
-    color: 0xffffff, transparent: true, opacity: 0.25
+    color: 0xD4242B, transparent: true, opacity: 0.35
   }));
   group.add(edgeLines);
 
@@ -121,7 +121,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   group.add(crossGroup);
 
   /* ─── SCALE ─── */
-  group.scale.set(1.3, 1.3, 1.3);
+  group.scale.set(1.17, 1.17, 1.17);
   scene.add(group);
 
   /* ─── SCROLL ─── */
@@ -159,7 +159,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
                      scrollSmooth < 0.3 ? 0.82 :
                      scrollSmooth < 0.6 ? 0.55 : 0.3;
     diamondMat.opacity += (opTarget - diamondMat.opacity) * 0.05;
-    edgeLines.material.opacity = diamondMat.opacity * 0.28;
+    edgeLines.material.opacity = diamondMat.opacity * 0.38;
     crossMat.opacity = Math.min(diamondMat.opacity * 0.85, 0.8);
 
     // Emissive pulse — diamond breathes red
@@ -170,7 +170,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
     crossMat.emissiveIntensity = 0.08 + Math.sin(t * 0.5) * 0.04;
 
     // Scale
-    const s = 1.3 + scrollSmooth * 0.1;
+    const s = 1.17 + scrollSmooth * 0.1;
     group.scale.set(s, s, s);
 
     renderer.render(scene, camera);
