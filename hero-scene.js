@@ -69,7 +69,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
     envMap, envMapIntensity: 1.8,
     specularIntensity: 0.8, specularColor: new THREE.Color(0xff8888),
     emissive: 0xCC2020, emissiveIntensity: 0.8,
-    transparent: true, opacity: 0.95, side: THREE.DoubleSide,
+    transparent: false, opacity: 1.0, side: THREE.DoubleSide,
   });
 
   const group = new THREE.Group();
