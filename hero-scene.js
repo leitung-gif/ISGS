@@ -62,11 +62,11 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
 
   /* ─── MATERIAL ─── */
   const diamondMat = new THREE.MeshPhysicalMaterial({
-    color: 0xAA1520, metalness: 0.25, roughness: 0.08,
+    color: 0xBF1A24, metalness: 0.25, roughness: 0.08,
     transmission: 0.0, clearcoat: 1.0, clearcoatRoughness: 0.0,
     envMap, envMapIntensity: 3.0,
     specularIntensity: 1.0, specularColor: new THREE.Color(0xffffff),
-    emissive: 0x330808, emissiveIntensity: 0.3,
+    emissive: 0x3D0A0A, emissiveIntensity: 0.35,
     transparent: true, opacity: 0.95, side: THREE.DoubleSide,
   });
 
