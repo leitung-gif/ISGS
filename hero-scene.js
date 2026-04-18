@@ -35,18 +35,18 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   pmrem.dispose();
 
   /* ─── LIGHTING ─── */
-  scene.add(new THREE.AmbientLight(0xfff0f0, 0.4));
-  const key = new THREE.DirectionalLight(0xffffff, 4.0);
+  scene.add(new THREE.AmbientLight(0xff9090, 0.3));
+  const key = new THREE.DirectionalLight(0xffffff, 2.0);
   key.position.set(4, 8, 5); scene.add(key);
-  const fill = new THREE.DirectionalLight(0xffddcc, 2.0);
+  const fill = new THREE.DirectionalLight(0xff6655, 2.5);
   fill.position.set(-5, 3, 4); scene.add(fill);
-  const rim = new THREE.DirectionalLight(0xff4444, 1.5);
+  const rim = new THREE.DirectionalLight(0xff2222, 3.0);
   rim.position.set(0, -3, -6); scene.add(rim);
-  const spot = new THREE.PointLight(0xffffff, 3.0, 15);
+  const spot = new THREE.PointLight(0xffffff, 1.5, 15);
   spot.position.set(0, 8, 0); scene.add(spot);
-  const redUp = new THREE.PointLight(0xD4242B, 4.5, 12);
+  const redUp = new THREE.PointLight(0xD4242B, 6.0, 14);
   redUp.position.set(0, -4, 1); scene.add(redUp);
-  const redTop = new THREE.PointLight(0xff3333, 2.0, 10);
+  const redTop = new THREE.PointLight(0xff2222, 4.0, 12);
   redTop.position.set(2, 5, 3); scene.add(redTop);
 
   /* ─── DIAMOND GEOMETRY — 6-sided ─── */
@@ -66,9 +66,9 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   const diamondMat = new THREE.MeshPhysicalMaterial({
     color: 0xFF1A1A, metalness: 0.15, roughness: 0.03,
     transmission: 0.0, clearcoat: 1.0, clearcoatRoughness: 0.0,
-    envMap, envMapIntensity: 3.0,
-    specularIntensity: 1.0, specularColor: new THREE.Color(0xffffff),
-    emissive: 0xAA2020, emissiveIntensity: 0.6,
+    envMap, envMapIntensity: 1.8,
+    specularIntensity: 0.8, specularColor: new THREE.Color(0xff8888),
+    emissive: 0xCC2020, emissiveIntensity: 0.8,
     transparent: true, opacity: 0.95, side: THREE.DoubleSide,
   });
 
