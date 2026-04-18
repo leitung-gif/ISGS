@@ -44,7 +44,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
   rim.position.set(0, -3, -6); scene.add(rim);
   const spot = new THREE.PointLight(0xffffff, 3.0, 15);
   spot.position.set(0, 8, 0); scene.add(spot);
-  const redUp = new THREE.PointLight(0xD4242B, 2.0, 10);
+  const redUp = new THREE.PointLight(0xD4242B, 3.0, 10);
   redUp.position.set(0, -4, 1); scene.add(redUp);
 
   /* ─── DIAMOND GEOMETRY — 6-sided ─── */
@@ -62,11 +62,11 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.m
 
   /* ─── MATERIAL ─── */
   const diamondMat = new THREE.MeshPhysicalMaterial({
-    color: 0xD4242B, metalness: 0.22, roughness: 0.06,
+    color: 0xE8202A, metalness: 0.18, roughness: 0.04,
     transmission: 0.0, clearcoat: 1.0, clearcoatRoughness: 0.0,
     envMap, envMapIntensity: 3.0,
     specularIntensity: 1.0, specularColor: new THREE.Color(0xffffff),
-    emissive: 0x5A1010, emissiveIntensity: 0.4,
+    emissive: 0x801515, emissiveIntensity: 0.5,
     transparent: true, opacity: 0.95, side: THREE.DoubleSide,
   });
 
